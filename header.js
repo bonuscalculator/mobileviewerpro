@@ -5,7 +5,7 @@
   const headerHTML = `
     <header class="site-header" id="siteHeader" role="banner">
       <div class="container" style="width:100%;max-width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
-        <a href="/" class="header-logo" aria-label="MobileViewer.pro Home">
+        <a href="/" class="header-logo" aria-label="Mobile Viewer pro Home">
           <div class="logo-mark" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
               <rect x="5" y="2" width="14" height="20" rx="2"/>
@@ -16,7 +16,7 @@
         </a>
 
         <nav class="header-nav" role="navigation" aria-label="Main navigation">
-          <a href="#home" class="nav-link active" aria-current="page">Home</a>
+          <a href="/" class="nav-link active" aria-current="page">Home</a>
           <a href="#viewer" class="nav-link">Viewer</a>
           <a href="#features" class="nav-link">Features</a>
           <a href="#devices" class="nav-link">Devices</a>
@@ -25,7 +25,7 @@
         </nav>
 
         <div class="header-actions">
-          <a href="#viewer" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">
+          <a href="/#viewer" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
             Try Free
           </a>
@@ -40,13 +40,13 @@
     </header>
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" role="navigation">
-      <a href="#home" class="nav-link">Home</a>
-      <a href="#viewer" class="nav-link">Viewer</a>
-      <a href="#features" class="nav-link">Features</a>
-      <a href="#devices" class="nav-link">Devices</a>
-      <a href="#use-cases" class="nav-link">Use Cases</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#viewer" class="btn btn-primary" style="margin-top:8px;justify-content:center;">Try Free</a>
+      <a href="/" class="nav-link">Home</a>
+      <a href="/#viewer" class="nav-link">Viewer</a>
+      <a href="/#features" class="nav-link">Features</a>
+      <a href="/#devices" class="nav-link">Devices</a>
+      <a href="/#use-cases" class="nav-link">Use Cases</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/#viewer" class="btn btn-primary" style="margin-top:8px;justify-content:center;">Try Free</a>
     </nav>
   `;
 
