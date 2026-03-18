@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>MobileViewer.pro – View Any Website on Any Mobile Device Online</title>
+  <meta name="description" content="MobileViewer.pro lets you instantly preview, test and inspect any website across all mobile devices and screen sizes. No downloads. Real-time responsive testing for developers and designers." />
+  <meta name="keywords" content="mobile viewer, mobile website viewer, responsive design tester, view website on mobile, mobile preview tool, mobile device simulator, screen size tester, responsive web tester, mobile emulator online, website mobile preview" />
+  <meta name="author" content="MobileViewer.pro" />
+  <link rel="canonical" href="https://mobileviewer.pro/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MobileViewer.pro – View Any Website on Any Mobile Device" />
+  <meta property="og:description" content="Instantly preview any website on iPhone, Android, tablets and more. Real-time responsive design testing." />
+  <meta property="og:url" content="https://mobileviewer.pro/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://mobileviewer.pro/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MobileViewer.pro – Mobile Website Viewer" />
+  <meta name="twitter:description" content="Preview any website instantly on any mobile device." />
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://mobileviewer.pro/#app",
+        "name": "MobileViewer.pro",
+        "url": "https://mobileviewer.pro/",
+        "description": "An online mobile website viewer and responsive design tester that lets you preview any URL on iPhone, Android, tablets, and other mobile devices instantly.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires a modern web browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Mobile device preview",
+          "Responsive design testing",
+          "Multi-device comparison",
+          "Screen size simulation",
+          "Real-time URL testing",
+          "Screenshot capture"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://mobileviewer.pro/#org",
+        "name": "MobileViewer.pro",
+        "url": "https://mobileviewer.pro/",
+        "logo": "https://mobileviewer.pro/logo.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mobileviewer.pro/#website",
+        "url": "https://mobileviewer.pro/",
+        "name": "MobileViewer.pro",
+        "publisher": { "@id": "https://mobileviewer.pro/#org" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://mobileviewer.pro/?url={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a Mobile Viewer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A mobile viewer is an online tool that lets you preview and test how any website looks on smartphones, tablets, and other mobile devices without needing a physical device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I view a website on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply enter the URL of the website you want to test into MobileViewer.pro, select your target device, and instantly see a live preview of how it renders on mobile screens."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does MobileViewer.pro work on all devices?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, MobileViewer.pro works on any modern browser and can simulate dozens of mobile devices including iPhones, Android phones, iPads, and other tablets."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="header-root"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Mobile Viewer Hero">
+      <div class="hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Live Mobile Preview Tool
+          </div>
+          <h1>View Any Website on <em>Any Mobile Device</em> — Instantly</h1>
+          <p class="hero-sub">The most powerful mobile viewer online. Test responsive designs, preview URLs on iPhone, Android, iPad, and 60+ devices — without touching a real phone.</p>
+          <div class="hero-cta">
+            <a href="#viewer" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              Start Viewing Free
+            </a>
+            <a href="#features" class="btn btn-ghost">See All Features</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>60+</strong><span>Devices</span></div>
+            <div class="stat-sep"></div>
+            <div class="stat"><strong>100%</strong><span>Browser-based</span></div>
+            <div class="stat-sep"></div>
+            <div class="stat"><strong>0ms</strong><span>Setup time</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="device-showcase">
+            <div class="device phone" id="heroPhone">
+              <div class="device-frame">
+                <div class="device-notch"></div>
+                <div class="device-screen">
+                  <div class="screen-browser">
+                    <div class="browser-bar">
+                      <div class="browser-dots"><span></span><span></span><span></span></div>
+                      <div class="browser-url" id="liveUrlDisplay">mobileviewer.pro</div>
+                    </div>
+                    <iframe id="heroIframe" class="screen-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin" title="Mobile Preview"></iframe>
+                    <div class="screen-placeholder" id="heroPlaceholder">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                      <p>Enter a URL below to preview</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="device-home-bar"></div>
+              </div>
+            </div>
+            <div class="device tablet floating-tablet" id="heroTablet">
+              <div class="device-frame">
+                <div class="device-screen tablet-screen">
+                  <div class="screen-browser">
+                    <div class="browser-bar small">
+                      <div class="browser-dots"><span></span><span></span><span></span></div>
+                      <div class="browser-url small" id="liveUrlDisplayTablet">mobileviewer.pro</div>
+                    </div>
+                    <div class="tablet-content-preview">
+                      <div class="tcp-nav"></div>
+                      <div class="tcp-hero">
+                        <div class="tcp-h"></div>
+                        <div class="tcp-p"></div>
+                        <div class="tcp-p short"></div>
+                        <div class="tcp-btn"></div>
+                      </div>
+                      <div class="tcp-grid">
+                        <div class="tcp-card"></div>
+                        <div class="tcp-card"></div>
+                        <div class="tcp-card"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Viewer App Section -->
+    <section class="viewer-section" id="viewer" aria-label="Mobile Website Viewer Tool">
+      <div class="container">
+        <div class="viewer-header">
+          <h2>Mobile Website Viewer</h2>
+          <p>Enter any URL to preview it on real mobile device dimensions</p>
+        </div>
+
+        <div class="viewer-controls">
+          <div class="url-bar-wrap">
+            <div class="url-input-group">
+              <svg class="url-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="url" id="urlInput" class="url-input" placeholder="https://example.com" aria-label="Enter website URL to preview" />
+              <button class="btn btn-primary btn-load" id="loadBtn" aria-label="Load website preview">
+                <span>Preview</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="device-picker" role="group" aria-label="Select device">
+            <button class="device-btn active" data-device="iphone15" aria-pressed="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+              iPhone 15
+            </button>
+            <button class="device-btn" data-device="iphone-se" aria-pressed="false">iPhone SE</button>
+            <button class="device-btn" data-device="pixel8" aria-pressed="false">Pixel 8</button>
+            <button class="device-btn" data-device="galaxy-s24" aria-pressed="false">Galaxy S24</button>
+            <button class="device-btn" data-device="ipad" aria-pressed="false">iPad Pro</button>
+            <button class="device-btn" data-device="ipad-mini" aria-pressed="false">iPad Mini</button>
+            <button class="device-btn" data-device="galaxy-tab" aria-pressed="false">Galaxy Tab</button>
+            <button class="device-btn" data-device="fold" aria-pressed="false">Z Fold 5</button>
+          </div>
+
+          <div class="viewer-tools">
+            <button class="tool-btn" id="rotateBtn" title="Rotate device">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Rotate
+            </button>
+            <button class="tool-btn" id="screenshotBtn" title="Take screenshot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              Screenshot
+            </button>
+            <button class="tool-btn" id="shareBtn" title="Share URL">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share
+            </button>
+            <div class="zoom-ctrl">
+              <button class="tool-btn zoom-btn" id="zoomOut">−</button>
+              <span id="zoomLevel">100%</span>
+              <button class="tool-btn zoom-btn" id="zoomIn">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="viewer-stage" id="viewerStage">
+          <div class="stage-info" id="stageInfo">
+            <span id="deviceLabel">iPhone 15</span>
+            <span class="dim-sep">|</span>
+            <span id="deviceDims">393 × 852 px</span>
+            <span class="dim-sep">|</span>
+            <span id="orientationLabel">Portrait</span>
+          </div>
+
+          <div class="preview-wrap" id="previewWrap">
+            <div class="preview-device" id="previewDevice">
+              <div class="pd-notch" id="pdNotch"></div>
+              <div class="pd-screen" id="pdScreen">
+                <div class="pd-placeholder" id="pdPlaceholder">
+                  <div class="pdp-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                  </div>
+                  <h3>Ready to Preview</h3>
+                  <p>Enter a URL above and click Preview to see your website on this device</p>
+                  <div class="pdp-hints">
+                    <div class="pdp-hint">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                      Instant preview
+                    </div>
+                    <div class="pdp-hint">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                      Real dimensions
+                    </div>
+                    <div class="pdp-hint">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      Live rendering
+                    </div>
+                  </div>
+                </div>
+                <iframe id="mainIframe" class="pd-iframe" src="about:blank" title="Mobile website preview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+              </div>
+              <div class="pd-home-bar" id="pdHomeBar"></div>
+              <div class="pd-side-btn left" id="pdSideLeft"></div>
+              <div class="pd-side-btn right" id="pdSideRight"></div>
+            </div>
+          </div>
+
+          <div class="viewer-sidebar">
+            <div class="sidebar-card" id="deviceInfoCard">
+              <h4>Device Info</h4>
+              <div class="info-row"><span>Model</span><strong id="siModel">iPhone 15</strong></div>
+              <div class="info-row"><span>Width</span><strong id="siWidth">393px</strong></div>
+              <div class="info-row"><span>Height</span><strong id="siHeight">852px</strong></div>
+              <div class="info-row"><span>DPR</span><strong id="siDpr">3x</strong></div>
+              <div class="info-row"><span>OS</span><strong id="siOs">iOS 17</strong></div>
+            </div>
+
+            <div class="sidebar-card" id="quickDevices">
+              <h4>Quick Switch</h4>
+              <div class="quick-device-list" id="quickDeviceList">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <div class="sidebar-card">
+              <h4>Custom Size</h4>
+              <div class="custom-size">
+                <input type="number" id="customW" placeholder="Width" min="200" max="1600" aria-label="Custom width" />
+                <span>×</span>
+                <input type="number" id="customH" placeholder="Height" min="300" max="1600" aria-label="Custom height" />
+                <button class="btn btn-sm" id="applyCustom">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features" aria-label="Features">
+      <div class="container">
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">Everything You Need for <br/><em>Mobile Web Testing</em></h2>
+        <p class="section-sub">MobileViewer.pro combines a mobile device simulator, responsive design tester, and website preview tool in one seamless experience.</p>
+
+        <div class="features-grid">
+          <div class="feature-card feature-card--large">
+            <div class="fc-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <h3>Multi-Device Mobile Viewer</h3>
+            <p>Preview any website on over 60 real mobile device profiles — from iPhone 15 Pro Max to budget Android phones. Each device replicates exact screen dimensions and pixel density for accurate mobile viewing.</p>
+            <ul class="fc-list">
+              <li>iPhone 15, 14, SE series</li>
+              <li>Google Pixel 8 & 7</li>
+              <li>Samsung Galaxy S24, Z Fold</li>
+              <li>OnePlus, Xiaomi & more</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="fc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h3>Tablet & iPad Preview</h3>
+            <p>Test responsive breakpoints on iPads, Galaxy Tabs, and Kindle Fire. Instantly switch between tablet portrait and landscape orientations.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="fc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </div>
+            <h3>Portrait & Landscape Rotation</h3>
+            <p>Instantly rotate any device between portrait and landscape mode to test your responsive layout at both orientations with a single click.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="fc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Custom Screen Sizes</h3>
+            <p>Not finding your device? Enter any custom width and height in pixels to create a bespoke mobile viewport for testing any screen dimension.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="fc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+            </div>
+            <h3>Screenshot Capture</h3>
+            <p>Capture a screenshot of your mobile preview for documentation, client presentations, or sharing with your development team.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="fc-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            </div>
+            <h3>Zoom & Scale Control</h3>
+            <p>Zoom in or out on your mobile preview to inspect fine details, check icon sizes, or view the full page at a glance — all without leaving the viewer.</p>
+          </div>
+
+          <div class="feature-card feature-card--large">
+            <div class="fc-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Real Responsive Design Testing</h3>
+            <p>Go beyond browser DevTools. MobileViewer.pro renders websites at true mobile device dimensions with correct viewport meta behavior, giving you a genuine picture of how users on mobile actually see your site. Identify layout breaks, overflow issues, and text readability problems before launch.</p>
+            <ul class="fc-list">
+              <li>Accurate viewport simulation</li>
+              <li>CSS media query testing</li>
+              <li>Mobile-first design validation</li>
+              <li>Cross-device breakpoint checking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-section" id="how-it-works" aria-label="How it works">
+      <div class="container">
+        <div class="section-label">Simple Process</div>
+        <h2 class="section-title">How the Mobile Viewer Works</h2>
+        <p class="section-sub">No setup, no installation, no extensions required. Viewing any website on mobile takes just three steps.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <h3>Enter Any URL</h3>
+              <p>Paste or type the web address of any website you want to view on mobile. Works with any public URL — landing pages, ecommerce stores, web apps, news sites, portfolios, and more.</p>
+            </div>
+            <div class="step-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <h3>Choose Your Device</h3>
+              <p>Select from 60+ mobile device profiles including the latest iPhones, Android phones, and tablets. Or set a custom width and height to match any specific screen size you need to test.</p>
+            </div>
+            <div class="step-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <h3>Preview Instantly</h3>
+              <p>See the website rendered live inside an accurate device frame. Rotate, zoom, capture screenshots, and switch between devices — all in real time, all in your browser.</p>
+            </div>
+            <div class="step-arrow hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Devices Section -->
+    <section class="devices-section" id="devices" aria-label="Supported devices">
+      <div class="container">
+        <div class="section-label">Device Library</div>
+        <h2 class="section-title">60+ Mobile Devices Supported</h2>
+        <p class="section-sub">From the latest flagship smartphones to budget handsets and tablets — test your website on the devices your real users actually own.</p>
+
+        <div class="device-category-tabs" role="tablist">
+          <button class="dcat-btn active" data-cat="all" role="tab" aria-selected="true">All</button>
+          <button class="dcat-btn" data-cat="iphone" role="tab" aria-selected="false">iPhone</button>
+          <button class="dcat-btn" data-cat="android" role="tab" aria-selected="false">Android</button>
+          <button class="dcat-btn" data-cat="tablet" role="tab" aria-selected="false">Tablets</button>
+        </div>
+
+        <div class="device-grid" id="deviceGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="usecases-section" id="use-cases" aria-label="Use cases">
+      <div class="container">
+        <div class="section-label">Who Uses MobileViewer</div>
+        <h2 class="section-title">Built for Builders, <em>Designers & Marketers</em></h2>
+        <p class="section-sub">Whether you're coding a website, designing a layout, or checking a client's site — the mobile viewer is your go-to tool.</p>
+
+        <div class="usecases-grid">
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Web Developers</h3>
+            <p>Test responsive CSS breakpoints, identify mobile rendering bugs, and validate your mobile-first design before deploying. View your localhost or staging URL on any device profile without physical hardware.</p>
+            <div class="uc-tags">
+              <span>Responsive Testing</span>
+              <span>CSS Debugging</span>
+              <span>Breakpoints</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>UI/UX Designers</h3>
+            <p>Preview design implementations on real device dimensions. Check typography legibility, touch target sizes, and visual hierarchy across screen sizes without switching between multiple devices.</p>
+            <div class="uc-tags">
+              <span>Design Review</span>
+              <span>Typography</span>
+              <span>Touch Targets</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>QA Testers</h3>
+            <p>Systematically check websites across a broad range of mobile devices to catch layout breaks, clickability issues, and mobile-specific bugs before they reach real users.</p>
+            <div class="uc-tags">
+              <span>Cross-device QA</span>
+              <span>Bug Detection</span>
+              <span>Regression Testing</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>Content Creators</h3>
+            <p>Check how blog posts, landing pages, and content-heavy pages read on mobile screens. Ensure your content is properly formatted and legible before sharing with your audience.</p>
+            <div class="uc-tags">
+              <span>Content Review</span>
+              <span>Blog Testing</span>
+              <span>Readability</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <h3>Digital Marketers</h3>
+            <p>Preview landing pages, ad destinations, and campaign microsites on mobile before launching paid campaigns. Mobile experience directly impacts conversion rates and quality scores.</p>
+            <div class="uc-tags">
+              <span>Landing Pages</span>
+              <span>Campaign Testing</span>
+              <span>CRO</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="uc-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>SEO Specialists</h3>
+            <p>Google uses mobile-first indexing. Validate mobile usability, check font sizes, button tap targets, and viewport configuration to ensure your site passes Core Web Vitals mobile checks.</p>
+            <div class="uc-tags">
+              <span>Mobile SEO</span>
+              <span>Core Web Vitals</span>
+              <span>Mobile-First</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keywords / SEO Text Section -->
+    <section class="content-section" id="about-tool" aria-label="About Mobile Viewer">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-main">
+            <div class="section-label">What is MobileViewer.pro?</div>
+            <h2>The Ultimate Online Mobile Website Viewer</h2>
+            <p>MobileViewer.pro is a free, browser-based <strong>mobile viewer</strong> that lets you view any website on mobile devices without owning them. Whether you need to perform <strong>responsive design testing</strong>, check how a competitor's site looks on a smartphone, or validate your own mobile web application, our tool makes it instant and effortless.</p>
+            <p>Traditional mobile testing required physical devices, expensive device labs, or cumbersome browser emulators buried inside developer tools. Our <strong>mobile website viewer</strong> changes that. Simply enter a URL and choose your target device — you'll see a live, accurate preview in seconds.</p>
+            <p>Unlike a browser's built-in DevTools responsive mode, MobileViewer.pro renders websites inside authentic device frames with correct pixel ratios, helping you communicate mobile experiences to clients and stakeholders far more effectively.</p>
+
+            <h3>Why Mobile Compatibility Matters More Than Ever</h3>
+            <p>Over 60% of global web traffic now comes from mobile devices. Google's mobile-first indexing means the mobile version of your site is what determines your search rankings. A poor <strong>mobile website view</strong> translates directly into higher bounce rates, lower conversions, and damaged SEO scores.</p>
+            <p>With MobileViewer.pro, every member of your team — from developers to project managers — can quickly check the mobile experience of any page, at any time, from any device.</p>
+          </div>
+
+          <div class="content-side">
+            <div class="content-box">
+              <h4>Key Use Cases</h4>
+              <ul class="content-list">
+                <li>Mobile website viewer for client presentations</li>
+                <li>Responsive design tester during development</li>
+                <li>Mobile preview tool for content teams</li>
+                <li>View website on mobile before launch</li>
+                <li>Mobile emulator for QA testing</li>
+                <li>Screen size tester for diverse audiences</li>
+                <li>Mobile SEO audit and validation</li>
+              </ul>
+            </div>
+
+            <div class="content-box">
+              <h4>Supported Screen Sizes</h4>
+              <ul class="content-list">
+                <li>320px — Small iPhone SE</li>
+                <li>375px — iPhone standard</li>
+                <li>390–430px — Large flagship phones</li>
+                <li>768px — iPad / tablet portrait</li>
+                <li>1024px — iPad landscape / desktop</li>
+                <li>Custom — Any dimension you need</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq" aria-label="Frequently Asked Questions">
+      <div class="container">
+        <div class="section-label">FAQs</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know about using the Mobile Viewer tool.</p>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              What is a mobile viewer and how does it work?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>A mobile viewer is an online tool that loads a website inside a simulated mobile device frame at exact mobile screen dimensions. MobileViewer.pro renders your target URL inside an iframe sized to the chosen device's viewport, giving you an accurate preview of how that website appears and behaves on mobile screens — all within your desktop browser.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Is MobileViewer.pro free to use?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Yes. MobileViewer.pro is completely free to use with no account required. Simply visit the site, enter a URL, select a device, and start previewing. No credit card, no sign-up, no download needed.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Can I view my localhost or staging site?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>For publicly accessible staging URLs (e.g., on a subdomain or behind a URL), yes. For true localhost development servers (localhost:3000, etc.), the preview may be limited by browser cross-origin restrictions. We recommend using tools like ngrok to tunnel your local server to a public URL for full mobile preview testing.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              How is this different from Chrome DevTools device emulation?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Chrome DevTools device emulation is a developer-only tool buried behind F12. MobileViewer.pro is accessible to everyone — designers, marketers, and clients — with no technical knowledge required. Our tool also provides realistic device frames for more convincing client presentations, and supports quick device switching without navigating DevTools menus.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Which mobile devices are supported?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>MobileViewer.pro supports 60+ device profiles including all major iPhone models (iPhone SE through iPhone 15 Pro Max), Google Pixel series, Samsung Galaxy S and Z series, OnePlus, and a range of tablets including iPad Pro, iPad Mini, Samsung Galaxy Tab, and Microsoft Surface. You can also enter any custom screen size.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Does it work on all websites?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Most public websites load correctly. Some websites block iframe embedding via X-Frame-Options or Content-Security-Policy headers, which may prevent preview. In those cases, you'll see a message indicating the site cannot be embedded. This is a security restriction set by the website itself, not a limitation of our tool.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Can I take a screenshot of the mobile preview?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Yes! Click the Screenshot button in the viewer toolbar to capture the current mobile preview. The image will be downloaded automatically. This is useful for documentation, design reviews, bug reports, and client presentations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="cta-bg-grid"></div>
+          <div class="cta-text">
+            <h2>Start Viewing Websites on Mobile — Free, Right Now</h2>
+            <p>No signup. No download. No limits. The fastest way to check any website on any mobile device.</p>
+            <a href="#viewer" class="btn btn-primary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              Open Mobile Viewer
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
