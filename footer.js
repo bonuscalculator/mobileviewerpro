@@ -16,7 +16,7 @@
                   <path d="M12 18h.01"/>
                 </svg>
               </div>
-              MobileViewer<span style="color:var(--accent-2)">.pro</span>
+              Mobile Viewer<span style="color:var(--accent-2)">pro</span>
             </a>
             <p>The fastest, easiest way to view any website on any mobile device. Test responsive designs, preview layouts, and validate mobile experiences — all free, all in your browser.</p>
           </div>
