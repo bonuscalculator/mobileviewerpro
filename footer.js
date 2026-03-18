@@ -9,14 +9,14 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="/" class="header-logo" style="text-decoration:none;" aria-label="Mobile Viewer pro">
+            <a href="/" class="header-logo" style="text-decoration:none;" aria-label="Mobile Viewer Pro">
               <div class="logo-mark" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
                   <rect x="5" y="2" width="14" height="20" rx="2"/>
                   <path d="M12 18h.01"/>
                 </svg>
               </div>
-              Mobile Viewer<span style="color:var(--accent-2)">pro</span>
+              Mobile Viewer<span style="color:var(--accent-2)">Pro</span>
             </a>
             <p>The fastest, easiest way to view any website on any mobile device. Test responsive designs, preview layouts, and validate mobile experiences — all free, all in your browser.</p>
           </div>
