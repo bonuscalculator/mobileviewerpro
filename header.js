@@ -17,10 +17,10 @@
 
         <nav class="header-nav" role="navigation" aria-label="Main navigation">
           <a href="/" class="nav-link active" aria-current="page">Home</a>
-          <a href="#viewer" class="nav-link">Viewer</a>
+          <a href="/#viewer" class="nav-link">Viewer</a>
           <a href="#features" class="nav-link">Features</a>
-          <a href="#devices" class="nav-link">Devices</a>
-          <a href="#use-cases" class="nav-link">Use Cases</a>
+          <a href="/#devices" class="nav-link">Devices</a>
+          <a href="/#use-cases" class="nav-link">Use Cases</a>
           <a href="#faq" class="nav-link">FAQ</a>
         </nav>
 
@@ -42,10 +42,10 @@
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" role="navigation">
       <a href="/" class="nav-link">Home</a>
       <a href="/#viewer" class="nav-link">Viewer</a>
-      <a href="/#features" class="nav-link">Features</a>
+      <a href="#features" class="nav-link">Features</a>
       <a href="/#devices" class="nav-link">Devices</a>
       <a href="/#use-cases" class="nav-link">Use Cases</a>
-      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="/#viewer" class="btn btn-primary" style="margin-top:8px;justify-content:center;">Try Free</a>
     </nav>
   `;
