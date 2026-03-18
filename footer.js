@@ -24,22 +24,22 @@
           <div class="footer-col">
             <h5>Tool</h5>
             <ul>
-              <li><a href="#viewer">Mobile Viewer</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#devices">Device Library</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li><a href="/#viewer">Mobile Viewer</a></li>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#devices">Device Library</a></li>
+              <li><a href="/#how-it-works">How It Works</a></li>
+              <li><a href="/#faq">FAQ</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h5>Use Cases</h5>
             <ul>
-              <li><a href="#use-cases">For Developers</a></li>
-              <li><a href="#use-cases">For Designers</a></li>
-              <li><a href="#use-cases">For QA Teams</a></li>
-              <li><a href="#use-cases">For Marketers</a></li>
-              <li><a href="#use-cases">For SEO</a></li>
+              <li><a href="/#use-cases">For Developers</a></li>
+              <li><a href="/#use-cases">For Designers</a></li>
+              <li><a href="/#use-cases">For QA Teams</a></li>
+              <li><a href="/#use-cases">For Marketers</a></li>
+              <li><a href="/#use-cases">For SEO</a></li>
             </ul>
           </div>
 
