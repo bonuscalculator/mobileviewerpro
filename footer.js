@@ -9,7 +9,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="/" class="header-logo" style="text-decoration:none;" aria-label="MobileViewer.pro">
+            <a href="/" class="header-logo" style="text-decoration:none;" aria-label="Mobile Viewer pro">
               <div class="logo-mark" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
                   <rect x="5" y="2" width="14" height="20" rx="2"/>
@@ -28,6 +28,7 @@
               <li><a href="#features">Features</a></li>
               <li><a href="#devices">Device Library</a></li>
               <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#faq">FAQ</a></li>
             </ul>
           </div>
 
@@ -44,12 +45,12 @@
 
           <div class="footer-col">
             <h5>Resources</h5>
-            <ul>
-              <li><a href="#faq">FAQ</a></li>
+            <ul>              
               <li><a href="#">Blog</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Use</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="privacy">Privacy Policy</a></li>
+              <li><a href="terms">Terms of Use</a></li>
+              <li><a href="contact">Contact</a></li>
+              <li><a href="about">About</a></li>
             </ul>
           </div>
         </div>
