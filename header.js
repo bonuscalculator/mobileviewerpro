@@ -12,7 +12,7 @@
               <path d="M12 18h.01"/>
             </svg>
           </div>
-          MobileViewer<span style="color:var(--accent-2)">.pro</span>
+          Mobile Viewer<span style="color:var(--accent-2)">Pro</span>
         </a>
 
         <nav class="header-nav" role="navigation" aria-label="Main navigation">
