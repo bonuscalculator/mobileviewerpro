@@ -56,7 +56,7 @@
             Replies within 1 business day
           </div>
           <div class="page-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1-2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             English support
           </div>
         </div>
@@ -67,9 +67,8 @@
       <div class="container">
         <div class="contact-layout">
 
-          <!-- Contact Form -->
           <div>
-            <div class="contact-form" id="contactFormWrap">
+            <form action="https://formspree.io/f/mojkrvro" method="POST" class="contact-form" id="contactFormWrap">
               <div class="form-row">
                 <div class="form-group">
                   <label for="cf-name">Full Name <span style="color:var(--danger)">*</span></label>
@@ -112,15 +111,14 @@
               </div>
 
               <div class="form-submit">
-                <button class="btn btn-primary" id="submitBtn" type="button">
+                <button class="btn btn-primary" id="submitBtn" type="submit">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                   Send Message
                 </button>
                 <span class="form-note">We'll get back to you within 1 business day.</span>
               </div>
-            </div>
+            </form>
 
-            <!-- Success State -->
             <div class="form-success" id="formSuccess">
               <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <h3>Message Sent!</h3>
@@ -129,7 +127,6 @@
             </div>
           </div>
 
-          <!-- Contact Info -->
           <div class="contact-info-cards">
             <div class="contact-info-card">
               <div class="cic-icon">
@@ -202,7 +199,12 @@
   <script src="footer.js"></script>
   <script src="pages.js"></script>
   <script>
-    document.getElementById('submitBtn').addEventListener('click', () => {
+    const contactForm = document.getElementById('contactFormWrap');
+    const submitBtn = document.getElementById('submitBtn');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
       const name = document.getElementById('cf-name').value.trim();
       const email = document.getElementById('cf-email').value.trim();
       const subject = document.getElementById('cf-subject').value;
@@ -218,16 +220,41 @@
         return;
       }
 
-      // Simulate submission
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending…`;
+      // UI Loading State
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending…`;
 
-      setTimeout(() => {
-        document.getElementById('contactFormWrap').style.display = 'none';
-        document.getElementById('formSuccess').classList.add('show');
-      }, 1400);
+      // Prepare data
+      const formData = new FormData(contactForm);
+
+      // Submit to Formspree via AJAX
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          document.getElementById('contactFormWrap').style.display = 'none';
+          document.getElementById('formSuccess').classList.add('show');
+        } else {
+          const data = await response.json();
+          alert(data.errors ? data.errors.map(error => error.message).join(", ") : "Oops! There was a problem submitting your form.");
+          resetButton();
+        }
+      } catch (error) {
+        alert("Oops! There was a problem connecting to the server.");
+        resetButton();
+      }
     });
+
+    function resetButton() {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message`;
+    }
   </script>
 </body>
 </html>
