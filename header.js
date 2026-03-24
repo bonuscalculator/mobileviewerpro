@@ -22,6 +22,7 @@
           <a href="/#devices" class="nav-link">Devices</a>
           <a href="/#use-cases" class="nav-link">Use Cases</a>
           <a href="#faq" class="nav-link">FAQ</a>
+          <a href="/blog" class="nav-link">Blog</a>
         </nav>
 
         <div class="header-actions">
