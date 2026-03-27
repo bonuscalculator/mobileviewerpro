@@ -29,6 +29,7 @@
               <li><a href="/#devices">Device Library</a></li>
               <li><a href="/#how-it-works">How It Works</a></li>
               <li><a href="/#faq">FAQ</a></li>
+              <li><a href="/qr-code-generator">QR Generator</a></li>              
             </ul>
           </div>
 
