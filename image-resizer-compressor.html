@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Image Resizer & Compressor – Free Online Tool | MobileViewer.pro</title>
+  <meta name="description" content="Free online image resizer and compressor with advanced options. Resize by pixels, percentage or preset. Compress JPEG, PNG, WebP. Bulk batch processing, crop, flip, rotate, convert formats. 100% private – no uploads." />
+  <meta name="keywords" content="image resizer, image compressor, resize image online, compress image, bulk image resize, image converter, jpg compressor, png optimizer, webp converter, free image tool" />
+  <link rel="canonical" href="https://www.mobileviewer.pro/image-resizer-compressor" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <meta property="og:title" content="Image Resizer & Compressor – Free Online | MobileViewer.pro" />
+  <meta property="og:description" content="Resize and compress images online with advanced controls. Batch process multiple images. Export as JPEG, PNG, WebP. No uploads — 100% browser-based." />
+  <meta property="og:url" content="https://mobileviewer.pro/image-resizer-compressor" />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Resizer & Compressor",
+    "url": "https://www.mobileviewer.pro/image-resizer-compressor",
+    "description": "Free online image resizer and compressor with advanced options including bulk batch processing, format conversion, crop, rotate, flip, and smart compression.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Image Resizing by pixels or percentage",
+      "Image Compression with quality control",
+      "Batch processing multiple images",
+      "Crop tool",
+      "Rotate and Flip",
+      "Format Conversion (JPEG, PNG, WebP)",
+      "Preset social media sizes",
+      "Aspect ratio lock",
+      "Before/After comparison",
+      "Metadata strip"
+    ],
+    "publisher": { "@type": "Organization", "name": "MobileViewer.pro", "url": "https://mobileviewer.pro" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+
+  <style>
+  /* ══════════════════════════════════
+     Image Tool – Full Dedicated Styles
+  ══════════════════════════════════ */
+
+  /* ── Tab bar ── */
+  .img-tabs {
+    display: flex; gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 5px; margin-bottom: 32px;
+    width: fit-content;
+  }
+  .img-tab {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 26px; border-radius: 12px;
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: var(--transition); border: none;
+    background: none; color: var(--text-2);
+  }
+  .img-tab:hover { color: var(--text); background: var(--surface-2); }
+  .img-tab.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--white); box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  /* ── App sections ── */
+  .img-app { display: none; }
+  .img-app.active { display: block; }
+
+  /* ── Drop zone ── */
+  .drop-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-xl);
+    padding: 56px 40px;
+    text-align: center;
+    cursor: pointer; position: relative;
+    transition: var(--transition); background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 14px;
+  }
+  .drop-zone.dragover { border-color: var(--accent); background: rgba(61,142,255,0.04); box-shadow: 0 0 0 4px var(--accent-glow); }
+  .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .drop-zone-icon { color: var(--accent-2); opacity: 0.7; }
+  .drop-zone h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--white); }
+  .drop-zone p { font-size: 0.88rem; color: var(--text-2); }
+  .drop-zone .supported { font-size: 0.76rem; color: var(--text-3); }
+  .drop-zone .or-divider {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; max-width: 280px;
+    color: var(--text-3); font-size: 0.8rem;
+  }
+  .drop-zone .or-divider::before,
+  .drop-zone .or-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── Main tool layout ── */
+  .tool-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px; align-items: start;
+  }
+  .tool-layout.batch { grid-template-columns: 1fr 300px; }
+
+  /* ── Panel ── */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+  }
+  .panel + .panel { margin-top: 16px; }
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: 0.76rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--text-3); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel-title svg { color: var(--accent-2); }
+
+  /* ── Canvas preview area ── */
+  .canvas-area {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden; position: relative;
+    min-height: 400px; display: flex;
+    align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .canvas-area canvas { max-width: 100%; max-height: 600px; display: block; border-radius: 8px; }
+  .canvas-placeholder {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; color: var(--text-3); padding: 40px;
+    text-align: center;
+  }
+  .canvas-placeholder svg { opacity: 0.2; }
+  .canvas-placeholder p { font-size: 0.85rem; max-width: 200px; }
+
+  /* ── Image meta bar ── */
+  .img-meta-bar {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 16px; display: none;
+  }
+  .img-meta-chip {
+    background: var(--bg-3); border: 1px solid var(--border);
+    border-radius: 7px; padding: 5px 12px;
+    font-size: 0.75rem; color: var(--text-3);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .img-meta-chip span { color: var(--accent-2); font-weight: 600; }
+
+  /* ── Comparison slider ── */
+  .compare-wrap {
+    position: relative; overflow: hidden;
+    border-radius: 10px; cursor: ew-resize;
+    user-select: none; display: none;
+  }
+  .compare-wrap.active { display: block; }
+  .compare-after { position: relative; }
+  .compare-after img { display: block; width: 100%; }
+  .compare-before {
+    position: absolute; top: 0; left: 0;
+    width: 50%; height: 100%; overflow: hidden;
+  }
+  .compare-before img { display: block; min-width: 200%; }
+  .compare-divider {
+    position: absolute; top: 0; left: 50%;
+    width: 3px; height: 100%;
+    background: var(--accent-2);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .compare-handle {
+    position: absolute; top: 50%; left: 50%;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px var(--accent-glow);
+    pointer-events: none;
+  }
+
+  /* ── Toolbar buttons ── */
+  .toolbar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .tool-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 9px;
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-2); cursor: pointer; transition: var(--transition);
+  }
+  .tool-btn:hover { border-color: var(--border-bright); color: var(--text); background: var(--surface-2); }
+  .tool-btn.active { background: rgba(61,142,255,0.12); border-color: var(--accent); color: var(--accent-2); }
+  .tool-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ── Form controls ── */
+  .field-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
+  .field-col { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .field-label { font-size: 0.8rem; font-weight: 500; color: var(--text-2); }
+  .field-input {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 9px; color: var(--text);
+    font-family: var(--font-body); font-size: 0.9rem;
+    padding: 10px 14px; outline: none;
+    transition: var(--transition); width: 100%;
+  }
+  .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .field-input::placeholder { color: var(--text-3); }
+  select.field-input { appearance: none; cursor: pointer; }
+  .lock-btn {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    background: var(--bg-3); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--transition); color: var(--text-3);
+    margin-bottom: 0; align-self: flex-end;
+  }
+  .lock-btn.locked { border-color: var(--accent-2); color: var(--accent-2); background: rgba(0,212,255,0.08); }
+  .lock-btn:hover { border-color: var(--border-bright); color: var(--text); }
+
+  /* Slider row */
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .slider-label { font-size: 0.8rem; color: var(--text-2); min-width: 80px; }
+  .slider-row input[type=range] {
+    flex: 1; -webkit-appearance: none; height: 4px;
+    border-radius: 4px; background: var(--border); outline: none; cursor: pointer;
+  }
+  .slider-row input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 16px; height: 16px;
+    border-radius: 50%; cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .slider-val {
+    font-size: 0.82rem; color: var(--accent-2); min-width: 42px;
+    text-align: right; font-family: var(--font-display); font-weight: 600;
+  }
+
+  /* Toggle switch */
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 0; border-bottom: 1px solid var(--border);
+  }
+  .toggle-row:last-child { border-bottom: none; }
+  .toggle-label { font-size: 0.85rem; color: var(--text-2); }
+  .toggle-sub { font-size: 0.72rem; color: var(--text-3); }
+  .toggle {
+    width: 40px; height: 22px; border-radius: 11px;
+    background: var(--bg-3); border: 1px solid var(--border);
+    cursor: pointer; position: relative; transition: var(--transition); flex-shrink: 0;
+  }
+  .toggle.on { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; box-shadow: 0 0 10px var(--accent-glow); }
+  .toggle::after {
+    content: ''; position: absolute; width: 16px; height: 16px;
+    background: #fff; border-radius: 50%; top: 2px; left: 2px;
+    transition: var(--transition); box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .toggle.on::after { left: 20px; }
+
+  /* ── Preset grid ── */
+  .preset-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 7px; margin-bottom: 16px;
+  }
+  .preset-btn {
+    padding: 8px 6px; border-radius: 8px;
+    background: var(--bg-3); border: 1px solid var(--border);
+    color: var(--text-3); font-size: 0.72rem;
+    cursor: pointer; transition: var(--transition);
+    text-align: center; line-height: 1.35;
+  }
+  .preset-btn strong { display: block; font-size: 0.78rem; color: var(--text-2); font-family: var(--font-display); }
+  .preset-btn:hover { border-color: var(--border-bright); color: var(--text-2); }
+  .preset-btn.active { background: rgba(61,142,255,0.1); border-color: var(--accent); color: var(--accent-2); }
+  .preset-btn.active strong { color: var(--accent-2); }
+
+  /* ── Output info card ── */
+  .output-card {
+    background: linear-gradient(135deg, rgba(61,142,255,0.08), rgba(0,212,255,0.05));
+    border: 1px solid rgba(61,142,255,0.2);
+    border-radius: var(--radius);
+    padding: 16px; margin-bottom: 14px; display: none;
+  }
+  .output-card.show { display: block; }
+  .output-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+  .output-row:last-child { border-bottom: none; }
+  .output-row .lbl { color: var(--text-3); }
+  .output-row .val { color: var(--accent-2); font-weight: 600; font-family: var(--font-display); }
+  .savings-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(0,208,132,0.12); border: 1px solid rgba(0,208,132,0.25);
+    color: var(--success); font-size: 0.72rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 99px; margin-top: 8px;
+  }
+
+  /* ── Batch list ── */
+  .batch-drop {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-lg); padding: 32px 24px;
+    text-align: center; cursor: pointer; position: relative;
+    transition: var(--transition); background: var(--bg);
+  }
+  .batch-drop.dragover { border-color: var(--accent); background: rgba(61,142,255,0.04); }
+  .batch-drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .batch-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .batch-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    transition: var(--transition);
+  }
+  .batch-thumb { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: var(--bg-3); }
+  .batch-info { flex: 1; min-width: 0; }
+  .batch-name { font-size: 0.83rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .batch-size { font-size: 0.72rem; color: var(--text-3); }
+  .batch-status {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 9px;
+    border-radius: 99px; white-space: nowrap; flex-shrink: 0;
+  }
+  .batch-status.pending { background: rgba(74,88,128,0.25); color: var(--text-3); }
+  .batch-status.processing { background: rgba(61,142,255,0.15); color: var(--accent-2); }
+  .batch-status.done { background: rgba(0,208,132,0.12); color: var(--success); }
+  .batch-status.error { background: rgba(255,77,106,0.12); color: var(--danger); }
+  .batch-dl {
+    background: none; border: 1px solid var(--border); border-radius: 7px;
+    color: var(--text-3); cursor: pointer; padding: 5px 7px;
+    transition: var(--transition); display: flex; align-items: center; flex-shrink: 0;
+  }
+  .batch-dl:hover { border-color: var(--accent-2); color: var(--accent-2); }
+  .batch-dl:disabled { opacity: 0.3; cursor: not-allowed; }
+  .batch-remove {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-3); padding: 4px; border-radius: 5px;
+    transition: var(--transition); flex-shrink: 0;
+  }
+  .batch-remove:hover { color: var(--danger); background: rgba(255,77,106,0.1); }
+
+  /* Batch progress bar */
+  .progress-bar-wrap {
+    background: var(--bg-3); border-radius: 99px; height: 5px;
+    overflow: hidden; margin-bottom: 12px; display: none;
+  }
+  .progress-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.3s ease;
+  }
+
+  /* ── Crop overlay (simple) ── */
+  .crop-overlay {
+    position: absolute; border: 2px solid var(--accent-2);
+    background: rgba(0,212,255,0.08); cursor: move;
+    box-shadow: 0 0 0 9999px rgba(8,12,20,0.65);
+    border-radius: 2px; display: none;
+  }
+  .crop-overlay.active { display: block; }
+  .crop-handle {
+    position: absolute; width: 10px; height: 10px;
+    background: var(--accent-2); border-radius: 2px;
+    border: 1px solid #fff;
+  }
+  .crop-handle.tl { top: -5px; left: -5px; cursor: nw-resize; }
+  .crop-handle.tr { top: -5px; right: -5px; cursor: ne-resize; }
+  .crop-handle.bl { bottom: -5px; left: -5px; cursor: sw-resize; }
+  .crop-handle.br { bottom: -5px; right: -5px; cursor: se-resize; }
+
+  /* ── Format badge ── */
+  .fmt-grid { display: flex; gap: 6px; flex-wrap: wrap; }
+  .fmt-btn {
+    padding: 7px 16px; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600; font-family: var(--font-display);
+    background: var(--bg-3); border: 1px solid var(--border);
+    color: var(--text-3); cursor: pointer; transition: var(--transition);
+  }
+  .fmt-btn:hover { border-color: var(--border-bright); color: var(--text); }
+  .fmt-btn.active { background: rgba(0,212,255,0.1); border-color: var(--accent-2); color: var(--accent-2); }
+
+  /* ── Download btn big ── */
+  .dl-btn-big {
+    width: 100%; justify-content: center;
+    padding: 14px; font-size: 0.97rem;
+    border-radius: 12px; margin-top: 6px;
+  }
+
+  /* ── Saving indicator ring ── */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 0.8s linear infinite; }
+
+  /* ── Feature pills ── */
+  .features-pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 48px 0 28px; }
+  .feat-pill {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 99px; padding: 7px 16px;
+    font-size: 0.8rem; color: var(--text-2);
+  }
+  .feat-pill svg { color: var(--accent-2); }
+
+  /* ── How it works ── */
+  .how-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin: 48px 0; }
+  .how-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; transition: var(--transition); }
+  .how-card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+  .how-num { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: rgba(61,142,255,0.15); line-height: 1; margin-bottom: 10px; }
+  .how-card h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .how-card p { font-size: 0.82rem; color: var(--text-2); line-height: 1.55; margin: 0; }
+
+  /* ── FAQ ── */
+  .sec-label { font-size: 0.74rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); margin-bottom: 8px; }
+  .sec-title { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); font-weight: 700; color: var(--white); letter-spacing: -0.025em; margin-bottom: 8px; }
+  .sec-sub { font-size: 0.93rem; color: var(--text-2); margin-bottom: 28px; }
+  .faq-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition); }
+  .faq-item.open { border-color: var(--border-bright); }
+  .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 0.92rem; font-weight: 500; color: var(--text); text-align: left; transition: color var(--transition); }
+  .faq-q:hover { color: var(--white); }
+  .faq-chev { flex-shrink: 0; color: var(--text-3); transition: transform var(--transition), color var(--transition); }
+  .faq-item.open .faq-chev { transform: rotate(180deg); color: var(--accent-2); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .faq-item.open .faq-a { max-height: 220px; }
+  .faq-a p { padding: 0 22px 18px; font-size: 0.88rem; color: var(--text-2); line-height: 1.7; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .tool-layout, .tool-layout.batch { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .img-tabs { width: 100%; }
+    .img-tab { flex: 1; justify-content: center; padding: 10px 10px; font-size: 0.82rem; }
+    .preset-grid { grid-template-columns: repeat(2,1fr); }
+    .how-grid { grid-template-columns: 1fr; }
+    .field-row { flex-direction: column; }
+    .toolbar { gap: 6px; }
+  }
+  </style>
+</head>
+<body>
+  <div id="header-root"></div>
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="page-hero">
+      <div class="page-hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+      </div>
+      <div class="container page-hero-inner">
+        <nav class="page-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span>›</span>
+          <span>Image Resizer &amp; Compressor</span>
+        </nav>
+        <h1>Image Resizer &amp; <em>Compressor</em></h1>
+        <p>Resize, compress, crop, rotate, convert and batch-process images directly in your browser. Advanced controls, zero uploads, instant results.</p>
+        <div class="page-meta">
+          <div class="page-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Resize · Compress · Crop · Convert
+          </div>
+          <div class="page-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            100% Private – No uploads
+          </div>
+          <div class="page-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            Batch Process Multiple Images
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Tool Body ── -->
+    <div class="page-body">
+      <div class="container">
+
+        <!-- Tabs -->
+        <div class="img-tabs" role="tablist">
+          <button class="img-tab active" data-tab="resizer" role="tab">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21H3V3"/><path d="M21 3L3 21"/></svg>
+            Resizer
+          </button>
+          <button class="img-tab" data-tab="compressor" role="tab">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            Compressor
+          </button>
+          <button class="img-tab" data-tab="batch" role="tab">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Batch
+          </button>
+        </div>
+
+        <!-- ══════════ RESIZER TAB ══════════ -->
+        <div class="img-app active" id="app-resizer">
+          <div id="resizer-drop-wrap">
+            <div class="drop-zone" id="resizer-drop">
+              <input type="file" id="resizer-file" accept="image/*" multiple />
+              <div class="drop-zone-icon">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <h3>Drop your image here</h3>
+              <p>Drag &amp; drop or click to upload an image</p>
+              <div class="or-divider">or</div>
+              <button type="button" class="btn btn-primary" onclick="document.getElementById('resizer-file').click();event.stopPropagation();">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                Choose File
+              </button>
+              <p class="supported">Supports JPEG, PNG, WebP, GIF, BMP, TIFF, AVIF</p>
+            </div>
+          </div>
+
+          <div id="resizer-tool" style="display:none;">
+            <!-- Toolbar -->
+            <div class="toolbar" id="resizer-toolbar">
+              <button class="tool-btn" id="r-undo" disabled>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg> Undo
+              </button>
+              <button class="tool-btn" id="r-rotate-l">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg> Rotate L
+              </button>
+              <button class="tool-btn" id="r-rotate-r">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13"/></svg> Rotate R
+              </button>
+              <button class="tool-btn" id="r-flip-h">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><line x1="12" y1="3" x2="12" y2="21" stroke-dasharray="4 2"/></svg> Flip H
+              </button>
+              <button class="tool-btn" id="r-flip-v">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><line x1="3" y1="12" x2="21" y2="12" stroke-dasharray="4 2"/></svg> Flip V
+              </button>
+              <button class="tool-btn" id="r-crop-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg> Crop
+              </button>
+              <button class="tool-btn" id="r-compare-btn" disabled>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7l-3 3 3 3"/><path d="M19 7l3 3-3 3"/></svg> Compare
+              </button>
+              <button class="tool-btn" id="r-reset" style="margin-left:auto;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 2v6h6"/><path d="M22 12A10 10 0 0 0 2.5 7"/><path d="M21.5 22v-6h-6"/><path d="M2 12a10 10 0 0 0 19.5 5"/></svg> Reset
+              </button>
+            </div>
+
+            <!-- Meta bar -->
+            <div class="img-meta-bar" id="resizer-meta">
+              <div class="img-meta-chip">Original: <span id="meta-orig-size">–</span></div>
+              <div class="img-meta-chip">Dimensions: <span id="meta-orig-dim">–</span></div>
+              <div class="img-meta-chip">Format: <span id="meta-orig-fmt">–</span></div>
+              <div class="img-meta-chip">Filename: <span id="meta-orig-name">–</span></div>
+            </div>
+
+            <div class="tool-layout">
+              <!-- Left: Preview -->
+              <div>
+                <div class="canvas-area" id="resizer-canvas-area">
+                  <canvas id="resizer-canvas"></canvas>
+                  <div class="crop-overlay" id="crop-overlay">
+                    <div class="crop-handle tl"></div>
+                    <div class="crop-handle tr"></div>
+                    <div class="crop-handle bl"></div>
+                    <div class="crop-handle br"></div>
+                  </div>
+                </div>
+                <!-- Crop action row -->
+                <div id="crop-actions" style="display:none;margin-bottom:12px;">
+                  <div class="toolbar">
+                    <button class="tool-btn active" id="apply-crop">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Apply Crop
+                    </button>
+                    <button class="tool-btn" id="cancel-crop">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Cancel
+                    </button>
+                    <div class="field-row" style="margin-bottom:0;align-items:center;flex:1;">
+                      <span style="font-size:0.78rem;color:var(--text-3);">Aspect:</span>
+                      <select id="crop-aspect" class="field-input" style="padding:6px 10px;font-size:0.8rem;">
+                        <option value="free">Free</option>
+                        <option value="1:1">1:1 Square</option>
+                        <option value="16:9">16:9 Widescreen</option>
+                        <option value="4:3">4:3</option>
+                        <option value="3:2">3:2</option>
+                        <option value="2:3">2:3 Portrait</option>
+                        <option value="9:16">9:16 Story</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Compare view -->
+                <div class="compare-wrap" id="compare-wrap">
+                  <div class="compare-after"><img id="compare-after-img" src="" alt="After" /></div>
+                  <div class="compare-before"><img id="compare-before-img" src="" alt="Before" /></div>
+                  <div class="compare-divider"></div>
+                  <div class="compare-handle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Controls -->
+              <div>
+                <!-- Dimensions -->
+                <div class="panel">
+                  <div class="panel-title">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21H3V3"/><path d="M21 3L3 21"/></svg>
+                    Dimensions
+                  </div>
+
+                  <!-- Resize mode -->
+                  <div class="fmt-grid" style="margin-bottom:14px;">
+                    <button class="fmt-btn active" data-mode="px">Pixels</button>
+                    <button class="fmt-btn" data-mode="pct">Percent</button>
+                    <button class="fmt-btn" data-mode="preset">Presets</button>
+                  </div>
+
+                  <!-- Pixel mode -->
+                  <div id="mode-px">
+                    <div class="field-row">
+                      <div class="field-col">
+                        <label class="field-label">Width (px)</label>
+                        <input type="number" id="r-width" class="field-input" placeholder="800" min="1" max="10000" />
+                      </div>
+                      <button class="lock-btn locked" id="aspect-lock" title="Lock aspect ratio">
+                        <svg id="lock-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      </button>
+                      <div class="field-col">
+                        <label class="field-label">Height (px)</label>
+                        <input type="number" id="r-height" class="field-input" placeholder="600" min="1" max="10000" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Percent mode -->
+                  <div id="mode-pct" style="display:none;">
+                    <div class="slider-row">
+                      <span class="slider-label">Scale</span>
+                      <input type="range" id="r-pct" min="1" max="200" value="100" />
+                      <span class="slider-val" id="r-pct-val">100%</span>
+                    </div>
+                    <p id="pct-dims" style="font-size:0.76rem;color:var(--text-3);margin-bottom:8px;">Result: – × –</p>
+                  </div>
+
+                  <!-- Preset mode -->
+                  <div id="mode-preset" style="display:none;">
+                    <div class="preset-grid" id="preset-grid">
+                      <button class="preset-btn" data-w="1920" data-h="1080"><strong>1920×1080</strong>Full HD</button>
+                      <button class="preset-btn" data-w="1280" data-h="720"><strong>1280×720</strong>HD 720p</button>
+                      <button class="preset-btn" data-w="800" data-h="600"><strong>800×600</strong>SVGA</button>
+                      <button class="preset-btn" data-w="1080" data-h="1080"><strong>1080×1080</strong>Instagram</button>
+                      <button class="preset-btn" data-w="1200" data-h="628"><strong>1200×628</strong>OG / FB</button>
+                      <button class="preset-btn" data-w="1500" data-h="500"><strong>1500×500</strong>Twitter Header</button>
+                      <button class="preset-btn" data-w="1080" data-h="1920"><strong>1080×1920</strong>Story</button>
+                      <button class="preset-btn" data-w="2560" data-h="1440"><strong>2560×1440</strong>2K</button>
+                      <button class="preset-btn" data-w="3840" data-h="2160"><strong>3840×2160</strong>4K UHD</button>
+                      <button class="preset-btn" data-w="256" data-h="256"><strong>256×256</strong>Favicon</button>
+                      <button class="preset-btn" data-w="512" data-h="512"><strong>512×512</strong>App Icon</button>
+                      <button class="preset-btn" data-w="1024" data-h="500"><strong>1024×500</strong>Play Store</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Output settings -->
+                <div class="panel">
+                  <div class="panel-title">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Output Settings
+                  </div>
+
+                  <div style="margin-bottom:14px;">
+                    <label class="field-label" style="margin-bottom:6px;display:block;">Output Format</label>
+                    <div class="fmt-grid">
+                      <button class="fmt-btn active" data-rfmt="jpeg">JPEG</button>
+                      <button class="fmt-btn" data-rfmt="png">PNG</button>
+                      <button class="fmt-btn" data-rfmt="webp">WebP</button>
+                    </div>
+                  </div>
+
+                  <div id="r-quality-row" style="margin-bottom:0;">
+                    <div class="slider-row" style="margin-bottom:4px;">
+                      <span class="slider-label">Quality</span>
+                      <input type="range" id="r-quality" min="10" max="100" value="90" />
+                      <span class="slider-val" id="r-quality-val">90%</span>
+                    </div>
+                    <p style="font-size:0.73rem;color:var(--text-3);">Quality affects JPEG and WebP. PNG is lossless.</p>
+                  </div>
+
+                  <div style="margin-top:14px;">
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Strip EXIF Metadata</div><div class="toggle-sub">Remove GPS, camera info, timestamps</div></div>
+                      <div class="toggle on" id="toggle-strip" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Maintain Aspect Ratio</div><div class="toggle-sub">Prevents distortion when resizing</div></div>
+                      <div class="toggle on" id="toggle-aspect" onclick="this.classList.toggle('on');syncAspectToggle()"></div>
+                    </div>
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Upscale Allowed</div><div class="toggle-sub">Allow output larger than source</div></div>
+                      <div class="toggle" id="toggle-upscale" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Output info -->
+                <div class="output-card" id="r-output-card">
+                  <div class="output-row"><span class="lbl">Output size</span><span class="val" id="r-out-size">–</span></div>
+                  <div class="output-row"><span class="lbl">Dimensions</span><span class="val" id="r-out-dim">–</span></div>
+                  <div class="output-row"><span class="lbl">Format</span><span class="val" id="r-out-fmt">–</span></div>
+                  <div class="output-row"><span class="lbl">Est. file size</span><span class="val" id="r-out-bytes">–</span></div>
+                  <div id="r-savings-row" style="display:none;"><div class="savings-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span id="r-savings-text">saved</span></div></div>
+                </div>
+
+                <button class="btn btn-primary dl-btn-big" id="r-download-btn" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                  Resize &amp; Download
+                </button>
+                <button class="tool-btn" id="r-new-img" style="width:100%;justify-content:center;margin-top:10px;font-size:0.85rem;">
+                  ← Upload New Image
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════ COMPRESSOR TAB ══════════ -->
+        <div class="img-app" id="app-compressor">
+          <div id="comp-drop-wrap">
+            <div class="drop-zone" id="comp-drop">
+              <input type="file" id="comp-file" accept="image/*" />
+              <div class="drop-zone-icon">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </div>
+              <h3>Drop image to compress</h3>
+              <p>Supports JPEG, PNG, WebP, GIF, BMP</p>
+              <div class="or-divider">or</div>
+              <button type="button" class="btn btn-primary" onclick="document.getElementById('comp-file').click();event.stopPropagation();">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                Choose Image
+              </button>
+            </div>
+          </div>
+
+          <div id="comp-tool" style="display:none;">
+            <div class="img-meta-bar" id="comp-meta">
+              <div class="img-meta-chip">Original: <span id="cmeta-size">–</span></div>
+              <div class="img-meta-chip">Dimensions: <span id="cmeta-dim">–</span></div>
+              <div class="img-meta-chip">Format: <span id="cmeta-fmt">–</span></div>
+            </div>
+
+            <div class="tool-layout">
+              <!-- Preview -->
+              <div>
+                <div class="canvas-area" id="comp-canvas-area">
+                  <canvas id="comp-canvas"></canvas>
+                </div>
+                <!-- Before/after comparison toggle -->
+                <div class="toolbar" style="margin-top:12px;">
+                  <button class="tool-btn active" id="c-view-after">After</button>
+                  <button class="tool-btn" id="c-view-before">Before</button>
+                  <button class="tool-btn" id="c-view-compare">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7l-3 3 3 3M19 7l3 3-3 3"/></svg>
+                    Compare
+                  </button>
+                </div>
+                <div class="compare-wrap" id="comp-compare-wrap">
+                  <div class="compare-after"><img id="c-compare-after" src="" alt="Compressed" /></div>
+                  <div class="compare-before"><img id="c-compare-before" src="" alt="Original" /></div>
+                  <div class="compare-divider"></div>
+                  <div class="compare-handle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div>
+                <div class="panel">
+                  <div class="panel-title">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                    Compression Settings
+                  </div>
+
+                  <!-- Compression mode -->
+                  <div style="margin-bottom:14px;">
+                    <label class="field-label" style="margin-bottom:8px;display:block;">Mode</label>
+                    <div class="fmt-grid">
+                      <button class="fmt-btn" data-cmode="auto">Auto</button>
+                      <button class="fmt-btn active" data-cmode="manual">Manual</button>
+                      <button class="fmt-btn" data-cmode="target">Target Size</button>
+                    </div>
+                  </div>
+
+                  <!-- Manual quality -->
+                  <div id="cmode-manual">
+                    <div class="slider-row">
+                      <span class="slider-label">Quality</span>
+                      <input type="range" id="c-quality" min="1" max="100" value="80" />
+                      <span class="slider-val" id="c-quality-val">80%</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-3);margin-bottom:14px;margin-top:-8px;">
+                      <span>Smallest</span><span>Balanced</span><span>Best quality</span>
+                    </div>
+                  </div>
+
+                  <!-- Auto mode -->
+                  <div id="cmode-auto" style="display:none;">
+                    <div style="background:rgba(61,142,255,0.06);border:1px solid rgba(61,142,255,0.18);border-radius:9px;padding:14px;font-size:0.85rem;color:var(--text-2);margin-bottom:14px;">
+                      Auto mode intelligently selects the best quality/size balance for each image based on its content complexity.
+                    </div>
+                  </div>
+
+                  <!-- Target size mode -->
+                  <div id="cmode-target" style="display:none;">
+                    <div class="field-row" style="margin-bottom:14px;">
+                      <div class="field-col">
+                        <label class="field-label">Target File Size</label>
+                        <input type="number" id="c-target-size" class="field-input" placeholder="100" min="1" />
+                      </div>
+                      <div class="field-col">
+                        <label class="field-label">Unit</label>
+                        <select id="c-target-unit" class="field-input">
+                          <option>KB</option><option>MB</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Output format -->
+                  <div style="margin-bottom:14px;">
+                    <label class="field-label" style="margin-bottom:8px;display:block;">Output Format</label>
+                    <div class="fmt-grid">
+                      <button class="fmt-btn active" data-cfmt="jpeg">JPEG</button>
+                      <button class="fmt-btn" data-cfmt="png">PNG</button>
+                      <button class="fmt-btn" data-cfmt="webp">WebP</button>
+                    </div>
+                  </div>
+
+                  <!-- Advanced toggles -->
+                  <div>
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Progressive JPEG</div><div class="toggle-sub">Loads gradually for better UX</div></div>
+                      <div class="toggle on" id="c-progressive" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Strip Metadata</div><div class="toggle-sub">Remove EXIF data to save space</div></div>
+                      <div class="toggle on" id="c-strip-meta" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                    <div class="toggle-row">
+                      <div><div class="toggle-label">Chroma Subsampling</div><div class="toggle-sub">4:2:0 for smaller JPEG files</div></div>
+                      <div class="toggle on" id="c-chroma" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Output stats -->
+                <div class="output-card show" id="c-output-card">
+                  <div class="output-row"><span class="lbl">Original size</span><span class="val" id="c-orig-size">–</span></div>
+                  <div class="output-row"><span class="lbl">Compressed size</span><span class="val" id="c-comp-size">–</span></div>
+                  <div class="output-row"><span class="lbl">Reduction</span><span class="val" id="c-reduction">–</span></div>
+                  <div class="output-row"><span class="lbl">Quality</span><span class="val" id="c-qual-stat">–</span></div>
+                  <div id="c-savings-row"><div class="savings-badge" id="c-savings-badge" style="display:none;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span id="c-savings-text">–</span></div></div>
+                </div>
+
+                <button class="btn btn-primary dl-btn-big" id="c-download-btn" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                  Download Compressed
+                </button>
+                <button class="tool-btn" id="c-new-img" style="width:100%;justify-content:center;margin-top:10px;">← Upload New Image</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════ BATCH TAB ══════════ -->
+        <div class="img-app" id="app-batch">
+          <div class="tool-layout batch">
+            <!-- Left: Files list -->
+            <div>
+              <div class="batch-drop" id="batch-drop">
+                <input type="file" id="batch-file" accept="image/*" multiple />
+                <div style="pointer-events:none;">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent-2);opacity:0.7;margin-bottom:10px;"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  <p style="font-size:0.9rem;color:var(--text);font-weight:500;">Drop multiple images here</p>
+                  <p style="font-size:0.8rem;color:var(--text-3);margin-top:5px;">or click to select files — up to 50 images at once</p>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px;">
+                <span id="batch-count" style="font-size:0.83rem;color:var(--text-3);">No files selected</span>
+                <div style="display:flex;gap:8px;">
+                  <button class="tool-btn" id="batch-select-all" style="font-size:0.78rem;padding:6px 12px;">Select All</button>
+                  <button class="tool-btn" id="batch-clear-all" style="font-size:0.78rem;padding:6px 12px;">Clear All</button>
+                </div>
+              </div>
+
+              <div class="progress-bar-wrap" id="batch-progress-wrap">
+                <div class="progress-bar-fill" id="batch-progress-fill" style="width:0%"></div>
+              </div>
+
+              <div class="batch-list" id="batch-list"></div>
+
+              <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;" id="batch-action-row" style="display:none;">
+                <button class="btn btn-primary" id="batch-process-btn" disabled style="flex:1;justify-content:center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+                  Process All
+                </button>
+                <button class="btn btn-ghost" id="batch-dl-all-btn" disabled style="flex:1;justify-content:center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                  Download All (ZIP)
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Batch settings -->
+            <div>
+              <div class="panel">
+                <div class="panel-title">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Batch Settings
+                </div>
+
+                <div style="margin-bottom:14px;">
+                  <label class="field-label" style="margin-bottom:8px;display:block;">Operation</label>
+                  <div class="fmt-grid">
+                    <button class="fmt-btn active" data-bop="resize">Resize</button>
+                    <button class="fmt-btn" data-bop="compress">Compress</button>
+                    <button class="fmt-btn" data-bop="convert">Convert</button>
+                  </div>
+                </div>
+
+                <!-- Batch resize settings -->
+                <div id="bop-resize">
+                  <div class="field-row">
+                    <div class="field-col">
+                      <label class="field-label">Max Width</label>
+                      <input type="number" id="b-max-w" class="field-input" value="1920" placeholder="1920" />
+                    </div>
+                    <div class="field-col">
+                      <label class="field-label">Max Height</label>
+                      <input type="number" id="b-max-h" class="field-input" value="1080" placeholder="1080" />
+                    </div>
+                  </div>
+                  <div class="toggle-row" style="margin-top:4px;">
+                    <div><div class="toggle-label">Keep aspect ratio</div></div>
+                    <div class="toggle on" id="b-aspect" onclick="this.classList.toggle('on')"></div>
+                  </div>
+                </div>
+
+                <!-- Batch compress settings -->
+                <div id="bop-compress" style="display:none;">
+                  <div class="slider-row">
+                    <span class="slider-label">Quality</span>
+                    <input type="range" id="b-quality" min="10" max="100" value="80" />
+                    <span class="slider-val" id="b-quality-val">80%</span>
+                  </div>
+                </div>
+
+                <!-- Batch convert settings (always visible partially) -->
+                <div style="margin-top:14px;">
+                  <label class="field-label" style="margin-bottom:8px;display:block;">Output Format</label>
+                  <div class="fmt-grid">
+                    <button class="fmt-btn active" data-bfmt="jpeg">JPEG</button>
+                    <button class="fmt-btn" data-bfmt="png">PNG</button>
+                    <button class="fmt-btn" data-bfmt="webp">WebP</button>
+                  </div>
+                </div>
+
+                <div style="margin-top:14px;">
+                  <label class="field-label" style="margin-bottom:6px;display:block;">File Naming</label>
+                  <select id="b-naming" class="field-input">
+                    <option value="original">original_processed</option>
+                    <option value="numbered">image_001, image_002…</option>
+                    <option value="prefix">Custom prefix + original</option>
+                  </select>
+                </div>
+                <div id="b-prefix-row" style="display:none;margin-top:10px;">
+                  <input type="text" id="b-prefix" class="field-input" placeholder="prefix_" />
+                </div>
+
+                <div style="margin-top:14px;">
+                  <div class="toggle-row">
+                    <div><div class="toggle-label">Strip EXIF</div></div>
+                    <div class="toggle on" id="b-strip" onclick="this.classList.toggle('on')"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Batch stats -->
+              <div class="panel" style="margin-top:16px;" id="batch-stats-card">
+                <div class="panel-title">Batch Summary</div>
+                <div class="output-row"><span class="lbl">Total files</span><span class="val" id="bs-total">0</span></div>
+                <div class="output-row"><span class="lbl">Processed</span><span class="val" id="bs-done">0</span></div>
+                <div class="output-row"><span class="lbl">Original total</span><span class="val" id="bs-orig-size">–</span></div>
+                <div class="output-row"><span class="lbl">Output total</span><span class="val" id="bs-out-size">–</span></div>
+                <div class="output-row"><span class="lbl">Space saved</span><span class="val" id="bs-saved">–</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Features strip ── -->
+        <div class="features-pills">
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No uploads — fully private</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> Batch up to 50 images</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> JPEG · PNG · WebP · GIF · BMP</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg> Crop tool</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13"/></svg> Rotate &amp; flip</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7l-3 3 3 3M19 7l3 3-3 3"/></svg> Before/after comparison</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> PNG · SVG · WebP export</div>
+          <div class="feat-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Instant processing</div>
+        </div>
+
+        <!-- ── How it works ── -->
+        <div class="how-grid">
+          <div class="how-card"><div class="how-num">01</div><h3>Upload Your Image</h3><p>Drag &amp; drop or click to upload. Supports JPEG, PNG, WebP, GIF, BMP, TIFF, and AVIF up to 50MB.</p></div>
+          <div class="how-card"><div class="how-num">02</div><h3>Choose Your Operation</h3><p>Resize by pixels, percentage or preset. Compress with quality control. Or use the batch tab for multiple images at once.</p></div>
+          <div class="how-card"><div class="how-num">03</div><h3>Adjust Advanced Options</h3><p>Set output format, quality, aspect ratio lock, metadata stripping, crop, rotate, flip, and more.</p></div>
+          <div class="how-card"><div class="how-num">04</div><h3>Download Instantly</h3><p>Your processed image downloads directly. Zero server involvement — all processing happens in your browser.</p></div>
+        </div>
+
+        <!-- ── FAQ ── -->
+        <div style="padding-bottom:60px;">
+          <div class="sec-label">FAQs</div>
+          <h2 class="sec-title">Frequently Asked Questions</h2>
+          <p class="sec-sub">Common questions about our image resizer and compressor tool.</p>
+          <div class="faq-wrap">
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">Is my image data private?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Yes, completely. All image processing happens entirely in your browser using the Canvas API and JavaScript. No image data is ever sent to our servers. Your images never leave your device.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">What is the maximum image size I can process?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Individual files up to 50MB. For batch processing, we recommend keeping total batch size under 500MB to avoid browser memory issues. Very large images (over 30MP) may take a few seconds to process depending on your device.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">What's the difference between resize and compress?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Resizing changes the pixel dimensions of an image (width × height). Compressing reduces the file size by adjusting quality or encoding efficiency without necessarily changing dimensions. Both tabs let you control quality — the Compressor tab focuses on achieving the smallest possible file at a target quality level.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">Which output format should I use?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Use JPEG for photographs and complex images where transparency isn't needed. Use PNG for graphics, logos, or screenshots that need lossless quality or transparency. Use WebP for the best compression — it's 25–35% smaller than JPEG at equivalent quality and is supported by all modern browsers.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">What does "Strip EXIF Metadata" do?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>EXIF metadata is embedded information in image files including GPS location, camera model, date/time, and settings. Stripping it removes this data from your exported image — useful for privacy, and it also reduces file size slightly. Canvas-based export automatically strips EXIF unless preserved.</p></div></div>
+            <div class="faq-item"><button class="faq-q" aria-expanded="false">Can I batch process images and download them all at once?<svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Yes. Use the Batch tab to upload up to 50 images, configure resize/compress/convert settings, and process them all simultaneously. You can download each image individually or use the "Download All (ZIP)" button to get a single ZIP archive with all processed images.</p></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+  <div class="toast" id="toast"></div>
+
+  <!-- JSZip for batch download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="pages.js"></script>
+
+<script>
+/* ══════════════════════════════════
+   Image Resizer & Compressor App
+══════════════════════════════════ */
+
+/* ── Toast ── */
+const toastEl = document.getElementById('toast');
+function showToast(msg, dur = 3000) {
+  toastEl.textContent = msg; toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), dur);
+}
+
+function formatBytes(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+  return (b / 1048576).toFixed(2) + ' MB';
+}
+
+/* ── Tab switching ── */
+document.querySelectorAll('.img-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.img-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.img-app').forEach(a => a.classList.remove('active'));
+    document.getElementById('app-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ── FAQ ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+    if (!open) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
+
+/* ════════════════════
+   RESIZER
+════════════════════ */
+let rImg = null, rOriginalImg = null, rHistory = [], rCurrentFile = null;
+let rAspectLocked = true, rRotation = 0, rFlipH = false, rFlipV = false;
+let rCropping = false, rCropStart = null, rCropRect = { x:0, y:0, w:0, h:0 };
+let rCurrentMode = 'px', rCurrentFmt = 'jpeg';
+
+const rCanvas = document.getElementById('resizer-canvas');
+const rCtx = rCanvas.getContext('2d');
+
+/* Setup drop */
+setupDrop('resizer-drop', 'resizer-file', loadResizerImage);
+
+function loadResizerImage(file) {
+  if (!file || !file.type.startsWith('image/')) { showToast('⚠️ Please upload an image file'); return; }
+  rCurrentFile = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      rImg = img; rOriginalImg = img;
+      rRotation = 0; rFlipH = false; rFlipV = false;
+      rHistory = [createImageSnapshot()];
+      document.getElementById('resizer-drop-wrap').style.display = 'none';
+      document.getElementById('resizer-tool').style.display = 'block';
+      document.getElementById('resizer-meta').style.display = 'flex';
+      document.getElementById('meta-orig-size').textContent = formatBytes(file.size);
+      document.getElementById('meta-orig-dim').textContent = img.width + ' × ' + img.height;
+      document.getElementById('meta-orig-fmt').textContent = file.type.split('/')[1].toUpperCase();
+      document.getElementById('meta-orig-name').textContent = file.name;
+      document.getElementById('r-width').value = img.width;
+      document.getElementById('r-height').value = img.height;
+      document.getElementById('r-pct').value = 100;
+      document.getElementById('r-pct-val').textContent = '100%';
+      document.getElementById('pct-dims').textContent = `Result: ${img.width} × ${img.height}`;
+      drawResizerCanvas();
+      document.getElementById('r-undo').disabled = true;
+      document.getElementById('r-compare-btn').disabled = false;
+      document.getElementById('r-download-btn').disabled = false;
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function drawResizerCanvas() {
+  if (!rImg) return;
+  const displayW = Math.min(rImg.width, 900);
+  const scale = displayW / rImg.width;
+  rCanvas.width = displayW;
+  rCanvas.height = Math.round(rImg.height * scale);
+  rCtx.save();
+  rCtx.translate(rCanvas.width/2, rCanvas.height/2);
+  rCtx.rotate(rRotation * Math.PI / 180);
+  rCtx.scale(rFlipH ? -1 : 1, rFlipV ? -1 : 1);
+  rCtx.drawImage(rImg, -rCanvas.width/2, -rCanvas.height/2, rCanvas.width, rCanvas.height);
+  rCtx.restore();
+}
+
+function createImageSnapshot() {
+  const c = document.createElement('canvas');
+  c.width = rImg.width; c.height = rImg.height;
+  c.getContext('2d').drawImage(rImg, 0, 0);
+  return c.toDataURL('image/png');
+}
+
+/* Undo */
+document.getElementById('r-undo').addEventListener('click', () => {
+  if (rHistory.length > 1) {
+    rHistory.pop();
+    const prev = new Image();
+    prev.onload = () => { rImg = prev; rRotation = 0; rFlipH = false; rFlipV = false; drawResizerCanvas(); };
+    prev.src = rHistory[rHistory.length - 1];
+    document.getElementById('r-undo').disabled = rHistory.length <= 1;
+  }
+});
+
+/* Transforms */
+document.getElementById('r-rotate-l').addEventListener('click', () => { rRotation = (rRotation - 90) % 360; applyTransform(); });
+document.getElementById('r-rotate-r').addEventListener('click', () => { rRotation = (rRotation + 90) % 360; applyTransform(); });
+document.getElementById('r-flip-h').addEventListener('click', () => { rFlipH = !rFlipH; applyTransform(); });
+document.getElementById('r-flip-v').addEventListener('click', () => { rFlipV = !rFlipV; applyTransform(); });
+
+function applyTransform() {
+  if (!rImg) return;
+  const tmp = document.createElement('canvas');
+  const isRotated90 = Math.abs(rRotation % 180) === 90;
+  tmp.width = isRotated90 ? rImg.height : rImg.width;
+  tmp.height = isRotated90 ? rImg.width : rImg.height;
+  const tCtx = tmp.getContext('2d');
+  tCtx.translate(tmp.width/2, tmp.height/2);
+  tCtx.rotate(rRotation * Math.PI / 180);
+  tCtx.scale(rFlipH ? -1 : 1, rFlipV ? -1 : 1);
+  tCtx.drawImage(rImg, -rImg.width/2, -rImg.height/2);
+  const newImg = new Image();
+  newImg.onload = () => {
+    rImg = newImg; rRotation = 0; rFlipH = false; rFlipV = false;
+    rHistory.push(createImageSnapshot());
+    document.getElementById('r-undo').disabled = false;
+    document.getElementById('r-width').value = rImg.width;
+    document.getElementById('r-height').value = rImg.height;
+    drawResizerCanvas();
+  };
+  newImg.src = tmp.toDataURL('image/png');
+}
+
+/* Aspect lock */
+document.getElementById('aspect-lock').addEventListener('click', () => {
+  rAspectLocked = !rAspectLocked;
+  document.getElementById('aspect-lock').classList.toggle('locked', rAspectLocked);
+  document.getElementById('lock-icon').innerHTML = rAspectLocked
+    ? '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
+    : '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 0 0 0"/>';
+});
+
+function syncAspectToggle() {
+  rAspectLocked = document.getElementById('toggle-aspect').classList.contains('on');
+  document.getElementById('aspect-lock').classList.toggle('locked', rAspectLocked);
+}
+
+document.getElementById('r-width').addEventListener('input', () => {
+  if (rAspectLocked && rImg) {
+    const ratio = rImg.height / rImg.width;
+    document.getElementById('r-height').value = Math.round(document.getElementById('r-width').value * ratio);
+  }
+});
+document.getElementById('r-height').addEventListener('input', () => {
+  if (rAspectLocked && rImg) {
+    const ratio = rImg.width / rImg.height;
+    document.getElementById('r-width').value = Math.round(document.getElementById('r-height').value * ratio);
+  }
+});
+
+/* Resize mode switching */
+document.querySelectorAll('[data-mode]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    rCurrentMode = btn.dataset.mode;
+    ['mode-px','mode-pct','mode-preset'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('mode-' + rCurrentMode).style.display = 'block';
+  });
+});
+
+/* Percent slider */
+document.getElementById('r-pct').addEventListener('input', function() {
+  document.getElementById('r-pct-val').textContent = this.value + '%';
+  if (rImg) {
+    const w = Math.round(rImg.width * this.value / 100);
+    const h = Math.round(rImg.height * this.value / 100);
+    document.getElementById('pct-dims').textContent = `Result: ${w} × ${h}`;
+  }
+});
+
+/* Presets */
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('r-width').value = btn.dataset.w;
+    document.getElementById('r-height').value = btn.dataset.h;
+    rAspectLocked = false;
+    document.getElementById('aspect-lock').classList.remove('locked');
+  });
+});
+
+/* Output format */
+document.querySelectorAll('[data-rfmt]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-rfmt]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    rCurrentFmt = btn.dataset.rfmt;
+    document.getElementById('r-quality-row').style.display = rCurrentFmt === 'png' ? 'none' : 'block';
+  });
+});
+
+/* Quality slider */
+document.getElementById('r-quality').addEventListener('input', function() {
+  document.getElementById('r-quality-val').textContent = this.value + '%';
+});
+
+/* Crop tool */
+let cropActive = false, cropDragging = false, cropStart = {x:0,y:0};
+const cropOverlay = document.getElementById('crop-overlay');
+const canvasArea = document.getElementById('resizer-canvas-area');
+
+document.getElementById('r-crop-btn').addEventListener('click', () => {
+  if (!rImg) return;
+  cropActive = !cropActive;
+  document.getElementById('r-crop-btn').classList.toggle('active', cropActive);
+  document.getElementById('crop-actions').style.display = cropActive ? 'block' : 'none';
+  if (cropActive) {
+    // Initialize crop to center 60%
+    const rect = rCanvas.getBoundingClientRect();
+    const cw = rect.width, ch = rect.height;
+    const cx = cw * 0.2, cy = ch * 0.2, cW = cw * 0.6, cH = ch * 0.6;
+    updateCropOverlay(cx, cy, cW, cH, rect);
+    cropOverlay.classList.add('active');
+  } else {
+    cropOverlay.classList.remove('active');
+  }
+});
+
+function updateCropOverlay(x, y, w, h, baseRect) {
+  const container = canvasArea.getBoundingClientRect();
+  const canvasRect = rCanvas.getBoundingClientRect();
+  const offsetX = canvasRect.left - container.left;
+  const offsetY = canvasRect.top - container.top;
+  cropOverlay.style.left = (offsetX + x) + 'px';
+  cropOverlay.style.top  = (offsetY + y) + 'px';
+  cropOverlay.style.width  = w + 'px';
+  cropOverlay.style.height = h + 'px';
+  rCropRect = { x: x / canvasRect.width, y: y / canvasRect.height, w: w / canvasRect.width, h: h / canvasRect.height };
+}
+
+document.getElementById('apply-crop').addEventListener('click', () => {
+  if (!rImg) return;
+  const px = Math.round(rCropRect.x * rImg.width);
+  const py = Math.round(rCropRect.y * rImg.height);
+  const pw = Math.round(rCropRect.w * rImg.width);
+  const ph = Math.round(rCropRect.h * rImg.height);
+  const tmp = document.createElement('canvas');
+  tmp.width = pw; tmp.height = ph;
+  tmp.getContext('2d').drawImage(rImg, px, py, pw, ph, 0, 0, pw, ph);
+  const croppedImg = new Image();
+  croppedImg.onload = () => {
+    rImg = croppedImg;
+    rHistory.push(createImageSnapshot());
+    document.getElementById('r-undo').disabled = false;
+    document.getElementById('r-width').value = rImg.width;
+    document.getElementById('r-height').value = rImg.height;
+    cropActive = false;
+    document.getElementById('r-crop-btn').classList.remove('active');
+    document.getElementById('crop-actions').style.display = 'none';
+    cropOverlay.classList.remove('active');
+    drawResizerCanvas();
+    showToast('✓ Crop applied');
+  };
+  croppedImg.src = tmp.toDataURL('image/png');
+});
+
+document.getElementById('cancel-crop').addEventListener('click', () => {
+  cropActive = false;
+  document.getElementById('r-crop-btn').classList.remove('active');
+  document.getElementById('crop-actions').style.display = 'none';
+  cropOverlay.classList.remove('active');
+});
+
+/* Compare toggle */
+document.getElementById('r-compare-btn').addEventListener('click', function() {
+  const wrap = document.getElementById('compare-wrap');
+  const showing = wrap.classList.contains('active');
+  if (!showing && rImg) {
+    document.getElementById('compare-before-img').src = rOriginalImg.src;
+    document.getElementById('compare-after-img').src = rCanvas.toDataURL('image/png');
+    wrap.classList.add('active');
+    document.getElementById('resizer-canvas-area').style.display = 'none';
+    this.classList.add('active');
+  } else {
+    wrap.classList.remove('active');
+    document.getElementById('resizer-canvas-area').style.display = 'flex';
+    this.classList.remove('active');
+  }
+});
+
+/* Comparison drag */
+setupCompareDrag('compare-wrap', 'compare-before', 'compare-divider', 'compare-handle');
+setupCompareDrag('comp-compare-wrap', 'comp-compare-before', null, null);
+
+function setupCompareDrag(wrapId, beforeId, divId, handleId) {
+  const wrap = document.getElementById(wrapId);
+  if (!wrap) return;
+  let dragging = false;
+  wrap.addEventListener('mousedown', () => dragging = true);
+  window.addEventListener('mouseup', () => dragging = false);
+  wrap.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    moveCompare(wrap, e.clientX, beforeId, divId, handleId);
+  });
+  wrap.addEventListener('touchmove', e => {
+    moveCompare(wrap, e.touches[0].clientX, beforeId, divId, handleId);
+  }, { passive: true });
+  wrap.addEventListener('click', e => moveCompare(wrap, e.clientX, beforeId, divId, handleId));
+}
+
+function moveCompare(wrap, clientX, beforeId, divId, handleId) {
+  const rect = wrap.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(100, (clientX - rect.left) / rect.width * 100));
+  const before = document.getElementById(beforeId);
+  if (before) { before.style.width = pct + '%'; }
+  if (divId) { const d = document.getElementById(divId); if (d) d.style.left = pct + '%'; }
+  if (handleId) { const h = document.getElementById(handleId); if (h) h.style.left = pct + '%'; }
+}
+
+/* Download resizer */
+document.getElementById('r-download-btn').addEventListener('click', () => {
+  if (!rImg) return;
+  let targetW, targetH;
+  if (rCurrentMode === 'px') {
+    targetW = parseInt(document.getElementById('r-width').value) || rImg.width;
+    targetH = parseInt(document.getElementById('r-height').value) || rImg.height;
+  } else if (rCurrentMode === 'pct') {
+    const pct = parseInt(document.getElementById('r-pct').value) / 100;
+    targetW = Math.round(rImg.width * pct);
+    targetH = Math.round(rImg.height * pct);
+  } else {
+    targetW = parseInt(document.getElementById('r-width').value) || rImg.width;
+    targetH = parseInt(document.getElementById('r-height').value) || rImg.height;
+  }
+
+  const noUpscale = !document.getElementById('toggle-upscale').classList.contains('on');
+  if (noUpscale) { targetW = Math.min(targetW, rImg.width); targetH = Math.min(targetH, rImg.height); }
+
+  const out = document.createElement('canvas');
+  out.width = targetW; out.height = targetH;
+  const outCtx = out.getContext('2d');
+  outCtx.imageSmoothingEnabled = true;
+  outCtx.imageSmoothingQuality = 'high';
+  outCtx.drawImage(rImg, 0, 0, targetW, targetH);
+
+  const quality = parseInt(document.getElementById('r-quality').value) / 100;
+  const mimeMap = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' };
+  const mime = mimeMap[rCurrentFmt];
+  const dataUrl = out.toDataURL(mime, quality);
+  const origName = (rCurrentFile ? rCurrentFile.name.replace(/\.[^.]+$/, '') : 'image');
+  const extMap = { jpeg: 'jpg', png: 'png', webp: 'webp' };
+
+  // Estimate size
+  const bytes = Math.round((dataUrl.length - `data:${mime};base64,`.length) * 0.75);
+  document.getElementById('r-output-card').classList.add('show');
+  document.getElementById('r-out-size').textContent = targetW + ' × ' + targetH;
+  document.getElementById('r-out-dim').textContent = targetW + ' × ' + targetH + ' px';
+  document.getElementById('r-out-fmt').textContent = rCurrentFmt.toUpperCase();
+  document.getElementById('r-out-bytes').textContent = formatBytes(bytes);
+  const origBytes = rCurrentFile ? rCurrentFile.size : bytes * 2;
+  const saved = origBytes - bytes;
+  if (saved > 0) {
+    document.getElementById('r-savings-row').style.display = 'block';
+    document.getElementById('r-savings-text').textContent = formatBytes(saved) + ' saved (' + Math.round(saved / origBytes * 100) + '%)';
+  }
+
+  const a = document.createElement('a');
+  a.download = `${origName}_resized.${extMap[rCurrentFmt]}`;
+  a.href = dataUrl;
+  a.click();
+  showToast(`✓ Resized to ${targetW}×${targetH} and downloaded!`);
+});
+
+/* Reset */
+document.getElementById('r-reset').addEventListener('click', () => {
+  if (!rOriginalImg) return;
+  rImg = rOriginalImg; rRotation = 0; rFlipH = false; rFlipV = false;
+  rHistory = [createImageSnapshot()];
+  document.getElementById('r-undo').disabled = true;
+  document.getElementById('r-width').value = rImg.width;
+  document.getElementById('r-height').value = rImg.height;
+  drawResizerCanvas();
+  showToast('↩ Reset to original');
+});
+
+/* New image */
+document.getElementById('r-new-img').addEventListener('click', () => {
+  rImg = null; rOriginalImg = null; rCurrentFile = null;
+  document.getElementById('resizer-drop-wrap').style.display = 'block';
+  document.getElementById('resizer-tool').style.display = 'none';
+  document.getElementById('resizer-meta').style.display = 'none';
+  document.getElementById('compare-wrap').classList.remove('active');
+  document.getElementById('resizer-canvas-area').style.display = 'flex';
+  document.getElementById('r-compare-btn').classList.remove('active');
+  document.getElementById('r-file').value = '';
+});
+
+/* ════════════════════
+   COMPRESSOR
+════════════════════ */
+let cImg = null, cOriginalDataUrl = null, cCurrentFmt = 'jpeg', cCurrentMode = 'manual';
+
+const cCanvas = document.getElementById('comp-canvas');
+const cCtx = cCanvas.getContext('2d');
+
+setupDrop('comp-drop', 'comp-file', loadCompressorImage);
+
+function loadCompressorImage(file) {
+  if (!file || !file.type.startsWith('image/')) { showToast('⚠️ Please upload an image file'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      cImg = img; cOriginalDataUrl = e.target.result;
+      document.getElementById('comp-drop-wrap').style.display = 'none';
+      document.getElementById('comp-tool').style.display = 'block';
+      document.getElementById('comp-meta').style.display = 'flex';
+      document.getElementById('cmeta-size').textContent = formatBytes(file.size);
+      document.getElementById('cmeta-dim').textContent = img.width + ' × ' + img.height;
+      document.getElementById('cmeta-fmt').textContent = file.type.split('/')[1].toUpperCase();
+      document.getElementById('c-orig-size').textContent = formatBytes(file.size);
+      cCanvas.width = img.width; cCanvas.height = img.height;
+      cCtx.drawImage(img, 0, 0);
+      document.getElementById('c-compare-before').src = cOriginalDataUrl;
+      compressAndPreview();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function compressAndPreview() {
+  if (!cImg) return;
+  const quality = parseInt(document.getElementById('c-quality').value) / 100;
+  const mime = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[cCurrentFmt];
+  const dataUrl = cCanvas.toDataURL(mime, quality);
+  const bytes = Math.round((dataUrl.length - `data:${mime};base64,`.length) * 0.75);
+  const origBytes = cImg.src ? (cImg.src.length * 0.75) : bytes;
+
+  document.getElementById('c-comp-size').textContent = formatBytes(bytes);
+  document.getElementById('c-reduction').textContent = Math.round((1 - bytes/origBytes) * 100) + '% smaller';
+  document.getElementById('c-qual-stat').textContent = Math.round(quality * 100) + '%';
+  document.getElementById('c-compare-after').src = dataUrl;
+  document.getElementById('c-download-btn').disabled = false;
+
+  const saved = origBytes - bytes;
+  if (saved > 100) {
+    document.getElementById('c-savings-badge').style.display = 'inline-flex';
+    document.getElementById('c-savings-text').textContent = formatBytes(saved) + ' saved';
+  }
+}
+
+/* Quality slider live update */
+document.getElementById('c-quality').addEventListener('input', function() {
+  document.getElementById('c-quality-val').textContent = this.value + '%';
+  compressAndPreview();
+});
+
+/* Format switching */
+document.querySelectorAll('[data-cfmt]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-cfmt]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cCurrentFmt = btn.dataset.cfmt;
+    compressAndPreview();
+  });
+});
+
+/* Mode switching */
+document.querySelectorAll('[data-cmode]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-cmode]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cCurrentMode = btn.dataset.cmode;
+    document.getElementById('cmode-manual').style.display = cCurrentMode === 'manual' ? 'block' : 'none';
+    document.getElementById('cmode-auto').style.display = cCurrentMode === 'auto' ? 'block' : 'none';
+    document.getElementById('cmode-target').style.display = cCurrentMode === 'target' ? 'block' : 'none';
+    if (cCurrentMode === 'auto') { document.getElementById('c-quality').value = 75; compressAndPreview(); }
+  });
+});
+
+/* View tabs */
+document.getElementById('c-view-after').addEventListener('click', function() {
+  this.classList.add('active'); document.getElementById('c-view-before').classList.remove('active'); document.getElementById('c-view-compare').classList.remove('active');
+  document.getElementById('comp-canvas-area').style.display = 'flex';
+  document.getElementById('comp-compare-wrap').classList.remove('active');
+  cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+  const quality = parseInt(document.getElementById('c-quality').value) / 100;
+  const mime = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[cCurrentFmt];
+  const afterImg = new Image();
+  afterImg.onload = () => cCtx.drawImage(afterImg, 0, 0);
+  afterImg.src = cCanvas.toDataURL(mime, quality);
+});
+
+document.getElementById('c-view-before').addEventListener('click', function() {
+  this.classList.add('active'); document.getElementById('c-view-after').classList.remove('active'); document.getElementById('c-view-compare').classList.remove('active');
+  document.getElementById('comp-canvas-area').style.display = 'flex';
+  document.getElementById('comp-compare-wrap').classList.remove('active');
+  if (cImg) cCtx.drawImage(cImg, 0, 0);
+});
+
+document.getElementById('c-view-compare').addEventListener('click', function() {
+  this.classList.add('active'); document.getElementById('c-view-after').classList.remove('active'); document.getElementById('c-view-before').classList.remove('active');
+  document.getElementById('comp-canvas-area').style.display = 'none';
+  document.getElementById('comp-compare-wrap').classList.add('active');
+  const quality = parseInt(document.getElementById('c-quality').value) / 100;
+  const mime = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[cCurrentFmt];
+  document.getElementById('c-compare-after').src = cCanvas.toDataURL(mime, quality);
+});
+
+/* Comp download */
+document.getElementById('c-download-btn').addEventListener('click', () => {
+  if (!cImg) return;
+  const quality = parseInt(document.getElementById('c-quality').value) / 100;
+  const mime = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[cCurrentFmt];
+  const extMap = { jpeg: 'jpg', png: 'png', webp: 'webp' };
+  const a = document.createElement('a');
+  a.download = 'compressed.' + extMap[cCurrentFmt];
+  a.href = cCanvas.toDataURL(mime, quality);
+  a.click();
+  showToast('✓ Compressed image downloaded!');
+});
+
+/* New image */
+document.getElementById('c-new-img').addEventListener('click', () => {
+  cImg = null;
+  document.getElementById('comp-drop-wrap').style.display = 'block';
+  document.getElementById('comp-tool').style.display = 'none';
+  document.getElementById('comp-meta').style.display = 'none';
+  document.getElementById('comp-compare-wrap').classList.remove('active');
+  document.getElementById('comp-canvas-area').style.display = 'flex';
+});
+
+/* ════════════════════
+   BATCH PROCESSOR
+════════════════════ */
+let batchFiles = [];
+let batchResults = [];
+let bBatchFmt = 'jpeg', bBatchOp = 'resize';
+
+setupDropBatch();
+
+document.getElementById('b-naming').addEventListener('change', function() {
+  document.getElementById('b-prefix-row').style.display = this.value === 'prefix' ? 'block' : 'none';
+});
+
+function setupDropBatch() {
+  const drop = document.getElementById('batch-drop');
+  const inp = document.getElementById('batch-file');
+  inp.addEventListener('change', () => addBatchFiles(Array.from(inp.files)));
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('dragover'); addBatchFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'))); });
+}
+
+document.querySelectorAll('[data-bop]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-bop]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    bBatchOp = btn.dataset.bop;
+    document.getElementById('bop-resize').style.display = bBatchOp === 'resize' ? 'block' : 'none';
+    document.getElementById('bop-compress').style.display = bBatchOp === 'compress' ? 'block' : 'none';
+  });
+});
+
+document.querySelectorAll('[data-bfmt]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-bfmt]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    bBatchFmt = btn.dataset.bfmt;
+  });
+});
+
+document.getElementById('b-quality').addEventListener('input', function() {
+  document.getElementById('b-quality-val').textContent = this.value + '%';
+});
+
+function addBatchFiles(files) {
+  files.slice(0, 50 - batchFiles.length).forEach(f => {
+    if (!batchFiles.find(x => x.name === f.name && x.size === f.size)) {
+      batchFiles.push(f);
+    }
+  });
+  renderBatchList();
+  updateBatchStats();
+}
+
+function renderBatchList() {
+  const list = document.getElementById('batch-list');
+  document.getElementById('batch-count').textContent = batchFiles.length + ' file' + (batchFiles.length !== 1 ? 's' : '') + ' selected';
+  document.getElementById('batch-process-btn').disabled = batchFiles.length === 0;
+  document.getElementById('bs-total').textContent = batchFiles.length;
+  list.innerHTML = '';
+  batchFiles.forEach((file, i) => {
+    const item = document.createElement('div');
+    item.className = 'batch-item';
+    item.id = 'bitem-' + i;
+    const result = batchResults[i];
+    const thumb = document.createElement('img');
+    thumb.className = 'batch-thumb';
+    const reader = new FileReader();
+    reader.onload = e => { thumb.src = e.target.result; };
+    reader.readAsDataURL(file);
+    item.appendChild(thumb);
+
+    const info = document.createElement('div');
+    info.className = 'batch-info';
+    info.innerHTML = `<div class="batch-name">${file.name}</div><div class="batch-size">${formatBytes(file.size)}</div>`;
+    item.appendChild(info);
+
+    const status = document.createElement('span');
+    status.className = 'batch-status ' + (result ? 'done' : 'pending');
+    status.textContent = result ? '✓ Done' : 'Pending';
+    item.appendChild(status);
+
+    const dlBtn = document.createElement('button');
+    dlBtn.className = 'batch-dl'; dlBtn.disabled = !result; dlBtn.title = 'Download';
+    dlBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>';
+    if (result) dlBtn.onclick = () => downloadBatchItem(i);
+    item.appendChild(dlBtn);
+
+    const rmBtn = document.createElement('button');
+    rmBtn.className = 'batch-remove'; rmBtn.title = 'Remove';
+    rmBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    rmBtn.onclick = () => { batchFiles.splice(i,1); batchResults.splice(i,1); renderBatchList(); updateBatchStats(); };
+    item.appendChild(rmBtn);
+    list.appendChild(item);
+  });
+  document.getElementById('batch-action-row').style.display = batchFiles.length ? 'flex' : 'none';
+}
+
+document.getElementById('batch-select-all').addEventListener('click', () => {
+  document.getElementById('batch-file').click();
+});
+document.getElementById('batch-clear-all').addEventListener('click', () => {
+  batchFiles = []; batchResults = [];
+  renderBatchList(); updateBatchStats();
+});
+
+document.getElementById('batch-process-btn').addEventListener('click', processBatch);
+
+async function processBatch() {
+  if (!batchFiles.length) return;
+  const btn = document.getElementById('batch-process-btn');
+  btn.disabled = true;
+  const progressWrap = document.getElementById('batch-progress-wrap');
+  const progressFill = document.getElementById('batch-progress-fill');
+  progressWrap.style.display = 'block';
+  batchResults = new Array(batchFiles.length).fill(null);
+
+  const maxW = parseInt(document.getElementById('b-max-w').value) || 1920;
+  const maxH = parseInt(document.getElementById('b-max-h').value) || 1080;
+  const quality = parseInt(document.getElementById('b-quality').value) / 100;
+  const keepAspect = document.getElementById('b-aspect').classList.contains('on');
+  const mime = { jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[bBatchFmt];
+
+  for (let i = 0; i < batchFiles.length; i++) {
+    const statusEl = document.querySelector(`#bitem-${i} .batch-status`);
+    if (statusEl) { statusEl.className = 'batch-status processing'; statusEl.textContent = '⟳ Processing'; }
+
+    await new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          let tw = img.width, th = img.height;
+          if (bBatchOp === 'resize' || bBatchOp === 'convert') {
+            if (keepAspect) {
+              const ratio = Math.min(maxW / img.width, maxH / img.height, 1);
+              tw = Math.round(img.width * ratio);
+              th = Math.round(img.height * ratio);
+            } else {
+              tw = Math.min(img.width, maxW);
+              th = Math.min(img.height, maxH);
+            }
+          }
+          const c = document.createElement('canvas');
+          c.width = tw; c.height = th;
+          const ctx = c.getContext('2d');
+          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, tw, th);
+          const q = bBatchOp === 'compress' ? quality : 0.9;
+          batchResults[i] = { dataUrl: c.toDataURL(mime, q), name: batchFiles[i].name, outSize: 0 };
+          const bytes = Math.round((batchResults[i].dataUrl.length - `data:${mime};base64,`.length) * 0.75);
+          batchResults[i].outSize = bytes;
+          if (statusEl) { statusEl.className = 'batch-status done'; statusEl.textContent = '✓ Done'; }
+          const dlBtn = document.querySelector(`#bitem-${i} .batch-dl`);
+          if (dlBtn) { dlBtn.disabled = false; dlBtn.onclick = () => downloadBatchItem(i); }
+          progressFill.style.width = ((i+1) / batchFiles.length * 100) + '%';
+          resolve();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(batchFiles[i]);
+    });
+  }
+
+  updateBatchStats();
+  btn.disabled = false;
+  document.getElementById('batch-dl-all-btn').disabled = false;
+  showToast(`✓ Processed ${batchFiles.length} images!`);
+}
+
+function downloadBatchItem(i) {
+  if (!batchResults[i]) return;
+  const extMap = { jpeg: 'jpg', png: 'png', webp: 'webp' };
+  const origName = batchFiles[i].name.replace(/\.[^.]+$/, '');
+  const a = document.createElement('a');
+  a.download = origName + '_processed.' + extMap[bBatchFmt];
+  a.href = batchResults[i].dataUrl;
+  a.click();
+}
+
+document.getElementById('batch-dl-all-btn').addEventListener('click', async () => {
+  const done = batchResults.filter(r => r);
+  if (!done.length) return;
+  const btn = document.getElementById('batch-dl-all-btn');
+  btn.disabled = true; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Zipping…';
+  const zip = new JSZip();
+  const extMap = { jpeg: 'jpg', png: 'png', webp: 'webp' };
+  batchResults.forEach((result, i) => {
+    if (!result) return;
+    const base64 = result.dataUrl.split(',')[1];
+    const origName = batchFiles[i].name.replace(/\.[^.]+$/, '');
+    zip.file(origName + '_processed.' + extMap[bBatchFmt], base64, { base64: true });
+  });
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'processed_images.zip';
+  a.click();
+  btn.disabled = false;
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Download All (ZIP)';
+  showToast('✓ ZIP downloaded with ' + done.length + ' images!');
+});
+
+function updateBatchStats() {
+  const orig = batchFiles.reduce((a, f) => a + f.size, 0);
+  const out = batchResults.filter(r => r).reduce((a, r) => a + r.outSize, 0);
+  document.getElementById('bs-orig-size').textContent = orig ? formatBytes(orig) : '–';
+  document.getElementById('bs-out-size').textContent = out ? formatBytes(out) : '–';
+  document.getElementById('bs-done').textContent = batchResults.filter(r => r).length;
+  if (orig && out) {
+    const saved = orig - out;
+    document.getElementById('bs-saved').textContent = saved > 0 ? formatBytes(saved) + ' (' + Math.round(saved/orig*100) + '%)' : '0 B';
+  }
+}
+
+/* ── Generic drop zone setup ── */
+function setupDrop(dropId, fileId, callback) {
+  const drop = document.getElementById(dropId);
+  const inp = document.getElementById(fileId);
+  if (!drop || !inp) return;
+  inp.addEventListener('change', () => { if (inp.files[0]) callback(inp.files[0]); });
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault(); drop.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) callback(file);
+    else showToast('⚠️ Please drop an image file');
+  });
+}
+</script>
+</body>
+</html>
