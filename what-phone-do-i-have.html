@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>What Phone Do I Have – Mobile Device Detector | MobileViewer.pro</title>
+  <meta name="description" content="Instantly detect your device's full specs: browser, OS, screen resolution, CPU cores, GPU, memory, battery, network, sensors, geolocation, and more. Free advanced device fingerprint tool." />
+  <meta name="keywords" content="device detector, device info, browser detector, screen resolution detector, user agent parser, device fingerprint, hardware info, mobile device specs, what is my device" />
+  <link rel="canonical" href="https://mobileviewer.pro/what-phone-do-i-have" />
+  <meta property="og:title" content="Mobile Device Detector – Full Specs & Info | MobileViewer.pro" />
+  <meta property="og:description" content="Detect your device's complete hardware and software specs: browser, OS, screen, GPU, memory, battery, network, sensors and more." />
+  <meta property="og:url" content="https://mobileviewer.pro/what-phone-do-i-have" />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mobile Device Detector",
+    "url": "https://mobileviewer.pro/what-phone-do-i-have",
+    "description": "Advanced device detection tool that reveals your browser, OS, hardware specs, screen details, GPU, memory, battery, network, sensors, and device fingerprint.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern web browser with JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Browser detection", "OS detection", "Device type detection",
+      "Screen & display info", "CPU & hardware info", "GPU detection",
+      "Memory info", "Battery status", "Network info",
+      "Sensor availability", "Geolocation", "Device fingerprint",
+      "Feature support detection", "User agent parsing"
+    ],
+    "publisher": { "@type": "Organization", "name": "MobileViewer.pro", "url": "https://mobileviewer.pro" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+
+  <style>
+  /* ════════════════════════════════════
+     Device Detector – Full App Styles
+  ════════════════════════════════════ */
+
+  /* ── Summary hero card ── */
+  .device-hero-card {
+    background: linear-gradient(135deg, var(--surface), rgba(61,142,255,0.06));
+    border: 1px solid rgba(61,142,255,0.2);
+    border-radius: var(--radius-xl);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .device-hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(99,140,220,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,140,220,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+  .device-icon-wrap {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px var(--accent-glow);
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .device-icon-wrap svg { color: #fff; }
+  .device-hero-info { position: relative; z-index: 1; }
+  .device-hero-type {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent-2); margin-bottom: 4px;
+  }
+  .device-hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 800; color: var(--white);
+    letter-spacing: -0.03em; line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .device-hero-sub { font-size: 0.88rem; color: var(--text-2); line-height: 1.5; }
+  .device-hero-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; position: relative; z-index: 1; }
+  .refresh-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 9px;
+    font-family: var(--font-body); font-size: 0.83rem; font-weight: 500;
+    background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--text-2); cursor: pointer; transition: var(--transition);
+    white-space: nowrap;
+  }
+  .refresh-btn:hover { border-color: var(--border-bright); color: var(--text); }
+  .share-btn-hero {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 9px;
+    font-family: var(--font-body); font-size: 0.83rem; font-weight: 500;
+    background: rgba(61,142,255,0.1); border: 1px solid rgba(61,142,255,0.25);
+    color: var(--accent-2); cursor: pointer; transition: var(--transition);
+    white-space: nowrap;
+  }
+  .share-btn-hero:hover { background: rgba(61,142,255,0.18); }
+  .copy-report-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 9px;
+    font-family: var(--font-body); font-size: 0.83rem; font-weight: 500;
+    background: rgba(0,208,132,0.1); border: 1px solid rgba(0,208,132,0.25);
+    color: var(--success); cursor: pointer; transition: var(--transition);
+    white-space: nowrap;
+  }
+  .copy-report-btn:hover { background: rgba(0,208,132,0.18); }
+
+  /* ── Score / trust meter ── */
+  .trust-ring-wrap {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
+  }
+  .trust-ring {
+    position: relative; width: 70px; height: 70px;
+  }
+  .trust-ring svg { transform: rotate(-90deg); }
+  .trust-ring .ring-bg { stroke: var(--surface-2); }
+  .trust-ring .ring-fill { stroke: url(#ringGrad); stroke-linecap: round; transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+  .trust-val {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--white);
+  }
+  .trust-label { font-size: 0.65rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── Main layout ── */
+  .detector-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* ── Nav sidebar ── */
+  .det-nav {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    position: sticky;
+    top: 90px;
+  }
+  .det-nav-title {
+    font-family: var(--font-display);
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--text-3); padding: 6px 10px 12px;
+    border-bottom: 1px solid var(--border); margin-bottom: 10px;
+  }
+  .det-nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 10px; border-radius: 8px;
+    font-size: 0.85rem; color: var(--text-2);
+    cursor: pointer; transition: var(--transition);
+    border: 1px solid transparent;
+    user-select: none;
+  }
+  .det-nav-item:hover { color: var(--text); background: var(--surface-2); }
+  .det-nav-item.active {
+    background: rgba(61,142,255,0.1);
+    border-color: rgba(61,142,255,0.2);
+    color: var(--accent-2);
+  }
+  .det-nav-item.active svg { color: var(--accent-2); }
+  .det-nav-item svg { color: var(--text-3); flex-shrink: 0; transition: color var(--transition); }
+  .det-nav-badge {
+    margin-left: auto;
+    font-size: 0.65rem; font-weight: 700;
+    background: rgba(0,208,132,0.15);
+    color: var(--success);
+    padding: 2px 7px; border-radius: 99px;
+  }
+  .det-nav-badge.warn { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .det-nav-badge.no { background: rgba(255,77,106,0.12); color: var(--danger); }
+
+  /* ── Section panel ── */
+  .det-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    scroll-margin-top: 90px;
+  }
+  .det-section:last-child { margin-bottom: 0; }
+  .det-section-hdr {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .det-section-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, rgba(61,142,255,0.15), rgba(0,212,255,0.08));
+    border: 1px solid rgba(61,142,255,0.2);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-2); flex-shrink: 0;
+  }
+  .det-section-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--white); letter-spacing: -0.02em;
+  }
+  .det-section-sub { font-size: 0.78rem; color: var(--text-3); margin-top: 1px; }
+  .det-section-badge {
+    margin-left: auto;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 99px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .sbc-ok { background: rgba(0,208,132,0.12); color: var(--success); border: 1px solid rgba(0,208,132,0.2); }
+  .sbc-warn { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .sbc-na { background: rgba(74,88,128,0.2); color: var(--text-3); border: 1px solid var(--border); }
+
+  /* ── Info grid ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .info-grid.wide { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .info-grid.full { grid-template-columns: 1fr; }
+
+  /* ── Info card ── */
+  .info-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    transition: var(--transition);
+  }
+  .info-card:hover { border-color: var(--border-bright); }
+  .info-card-label {
+    font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--text-3); margin-bottom: 5px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .info-card-label svg { color: var(--accent-2); }
+  .info-card-value {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 700;
+    color: var(--white); line-height: 1.3;
+    word-break: break-all;
+  }
+  .info-card-value.mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.83rem; font-weight: 400;
+    color: var(--accent-2); word-break: break-all;
+  }
+  .info-card-value.small {
+    font-size: 0.82rem; color: var(--text-2);
+    font-family: var(--font-body); font-weight: 400;
+  }
+  .info-card-sub { font-size: 0.72rem; color: var(--text-3); margin-top: 3px; }
+  .info-card-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.68rem; font-weight: 600;
+    padding: 2px 9px; border-radius: 99px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-top: 5px;
+  }
+  .badge-ok  { background: rgba(0,208,132,0.12); color: var(--success); }
+  .badge-no  { background: rgba(255,77,106,0.1); color: var(--danger); }
+  .badge-warn{ background: rgba(251,191,36,0.1); color: #fbbf24; }
+
+  /* ── Progress bar ── */
+  .prog-wrap { margin-top: 6px; }
+  .prog-track {
+    height: 4px; border-radius: 4px;
+    background: var(--border); overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .prog-fill.warn { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .prog-fill.low  { background: linear-gradient(90deg, var(--danger), #ff8a9a); }
+
+  /* ── Feature support table ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  .feat-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 12px; border-radius: 8px;
+    background: var(--bg-3); border: 1px solid var(--border);
+    font-size: 0.82rem; color: var(--text-2);
+    transition: var(--transition);
+  }
+  .feat-item:hover { border-color: var(--border-bright); }
+  .feat-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .feat-dot.yes { background: var(--success); box-shadow: 0 0 6px rgba(0,208,132,0.5); }
+  .feat-dot.no  { background: var(--danger); }
+  .feat-dot.partial { background: #fbbf24; }
+
+  /* ── Screen visual ── */
+  .screen-visual {
+    position: relative; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .screen-device-frame {
+    width: 120px; height: 200px;
+    background: linear-gradient(145deg, #1e2d50, #0f1a30);
+    border-radius: 22px;
+    border: 2px solid rgba(61,142,255,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(61,142,255,0.1);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .screen-notch {
+    position: absolute; top: 8px;
+    width: 36px; height: 8px;
+    background: #080c14; border-radius: 99px;
+  }
+  .screen-display {
+    background: var(--bg);
+    border-radius: 14px;
+    width: 88%; aspect-ratio: 9/19;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .screen-dpr-label {
+    font-family: var(--font-display);
+    font-size: 0.55rem; color: var(--accent-2);
+    text-align: center; line-height: 1.4;
+  }
+
+  /* ── Battery widget ── */
+  .battery-widget {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px; background: var(--bg-3);
+    border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .battery-body {
+    width: 54px; height: 26px;
+    border: 2px solid var(--text-3);
+    border-radius: 4px; position: relative;
+    display: flex; align-items: center;
+    padding: 2px; flex-shrink: 0;
+  }
+  .battery-body::after {
+    content: '';
+    position: absolute; right: -7px;
+    width: 5px; height: 12px;
+    background: var(--text-3);
+    border-radius: 0 2px 2px 0;
+    top: 50%; transform: translateY(-50%);
+  }
+  .battery-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--success), #00ff99);
+    transition: width 1s ease;
+  }
+  .battery-fill.med { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .battery-fill.low { background: linear-gradient(90deg, var(--danger), #ff8a9a); }
+  .battery-info { flex: 1; }
+  .battery-pct {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 800; color: var(--white); line-height: 1;
+  }
+  .battery-status { font-size: 0.75rem; color: var(--text-3); margin-top: 2px; }
+  .charging-bolt {
+    color: #fbbf24;
+    animation: chargePulse 1.2s ease-in-out infinite;
+  }
+  @keyframes chargePulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  /* ── Network speed indicator ── */
+  .speed-bars {
+    display: flex; align-items: flex-end; gap: 3px; height: 24px;
+  }
+  .speed-bar {
+    width: 6px; border-radius: 3px 3px 0 0;
+    background: var(--border); transition: background 0.5s;
+  }
+  .speed-bar.active { background: linear-gradient(0deg, var(--accent), var(--accent-2)); }
+
+  /* ── GPS / Map placeholder ── */
+  .geo-map-placeholder {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .geo-pin { color: var(--danger); flex-shrink: 0; }
+  .geo-coords {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--accent-2);
+    line-height: 1.6;
+  }
+
+  /* ── Fingerprint hash ── */
+  .fingerprint-card {
+    background: var(--bg-3);
+    border: 1px solid rgba(61,142,255,0.2);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .fp-hash {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: var(--accent-2);
+    word-break: break-all; line-height: 1.7;
+    padding: 12px; background: var(--bg);
+    border-radius: 8px; border: 1px solid var(--border);
+    margin: 10px 0;
+  }
+  .fp-component {
+    display: flex; justify-content: space-between;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .fp-component:last-child { border-bottom: none; }
+  .fp-key { color: var(--text-3); }
+  .fp-val { color: var(--text-2); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+
+  /* ── UA parser display ── */
+  .ua-raw {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: var(--text-2);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px;
+    word-break: break-all; line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .ua-token {
+    display: inline-block; padding: 1px 7px;
+    border-radius: 4px; margin: 2px;
+    font-size: 0.74rem; font-family: 'JetBrains Mono', monospace;
+  }
+  .ua-browser  { background: rgba(61,142,255,0.15); color: #7ec3ff; }
+  .ua-os       { background: rgba(168,85,247,0.15); color: #d8b4fe; }
+  .ua-engine   { background: rgba(0,212,255,0.1); color: #67e8f9; }
+  .ua-device   { background: rgba(251,146,60,0.15); color: #fed7aa; }
+
+  /* ── Live scan animation ── */
+  @keyframes scanPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(61,142,255,0.4); }
+    70%  { box-shadow: 0 0 0 14px rgba(61,142,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(61,142,255,0); }
+  }
+  .scanning-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent-2);
+    animation: scanPulse 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* ── Tab bar (secondary) ── */
+  .view-tabs {
+    display: flex; gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 4px;
+    margin-bottom: 20px; width: fit-content;
+  }
+  .view-tab {
+    padding: 8px 18px; border-radius: 9px;
+    font-family: var(--font-body); font-size: 0.83rem; font-weight: 500;
+    cursor: pointer; transition: var(--transition);
+    border: none; background: none; color: var(--text-2);
+  }
+  .view-tab:hover { color: var(--text); }
+  .view-tab.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; box-shadow: 0 0 14px var(--accent-glow);
+  }
+
+  /* ── Compare other device input ── */
+  .compare-input-row {
+    display: flex; gap: 10px; margin-bottom: 16px;
+  }
+  .compare-input-row input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 9px; color: var(--text);
+    font-family: var(--font-body); font-size: 0.88rem;
+    padding: 10px 14px; outline: none;
+  }
+  .compare-input-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .detector-layout { grid-template-columns: 1fr; }
+    .det-nav { position: static; display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; }
+    .det-nav-title { display: none; }
+    .det-nav-item { font-size: 0.78rem; padding: 7px 10px; }
+    .device-hero-card { grid-template-columns: auto 1fr; }
+    .device-hero-actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+  }
+  @media (max-width: 768px) {
+    .device-hero-card { grid-template-columns: 1fr; text-align: center; }
+    .device-icon-wrap { margin: 0 auto; }
+    .device-hero-actions { justify-content: center; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+  </style>
+</head>
+<body>
+  <div id="header-root"></div>
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="page-hero">
+      <div class="page-hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+      </div>
+      <div class="container page-hero-inner">
+        <nav class="page-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span>›</span>
+          <span>Device Detector</span>
+        </nav>
+        <h1>Mobile Device <em>Detector</em></h1>
+        <p>Instantly reveal your device's complete hardware and software profile — browser, OS, screen, GPU, memory, battery, network, sensors, fingerprint and more.</p>
+        <div class="page-meta">
+          <div class="page-meta-item">
+            <div class="scanning-dot"></div>
+            Live Detection
+          </div>
+          <div class="page-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            No Data Sent
+          </div>
+          <div class="page-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            20+ Detection Categories
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── App Body ── -->
+    <div class="page-body">
+      <div class="container">
+
+        <!-- Summary hero card -->
+        <div class="device-hero-card" id="heroCard">
+          <div class="device-icon-wrap" id="deviceIconWrap">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="deviceIconSvg"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+
+          <div class="device-hero-info">
+            <div class="device-hero-type" id="heroDeviceType">Detecting…</div>
+            <div class="device-hero-name" id="heroDeviceName">Your Device</div>
+            <div class="device-hero-sub" id="heroDeviceSub">Scanning hardware and software details…</div>
+          </div>
+
+          <!-- Trust / completeness ring -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+            <div class="trust-ring-wrap">
+              <div class="trust-ring">
+                <svg width="70" height="70">
+                  <defs>
+                    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#3d8eff"/>
+                      <stop offset="100%" stop-color="#00d4ff"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="ring-bg" cx="35" cy="35" r="29" fill="none" stroke-width="6"/>
+                  <circle class="ring-fill" id="trustRingFill" cx="35" cy="35" r="29" fill="none" stroke-width="6" stroke-dasharray="182" stroke-dashoffset="182"/>
+                </svg>
+                <div class="trust-val" id="trustVal">–</div>
+              </div>
+              <div class="trust-label">Data Score</div>
+            </div>
+            <div class="device-hero-actions">
+              <button class="refresh-btn" onclick="detectAll()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 2v6h6"/><path d="M22 12A10 10 0 0 0 2.5 7"/><path d="M21.5 22v-6h-6"/><path d="M2 12a10 10 0 0 0 19.5 5"/></svg>
+                Refresh
+              </button>
+              <button class="copy-report-btn" onclick="copyFullReport()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Report
+              </button>
+              <button class="share-btn-hero" onclick="shareDevice()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main layout -->
+        <div class="detector-layout">
+
+          <!-- ── Sidebar Nav ── -->
+          <nav class="det-nav" aria-label="Section navigation">
+            <div class="det-nav-title">Sections</div>
+            <div class="det-nav-item active" onclick="scrollTo('sec-browser')" data-sec="sec-browser">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Browser
+              <span class="det-nav-badge" id="nb-browser">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-os')" data-sec="sec-os">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              Operating System
+              <span class="det-nav-badge" id="nb-os">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-screen')" data-sec="sec-screen">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              Screen & Display
+              <span class="det-nav-badge" id="nb-screen">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-hardware')" data-sec="sec-hardware">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+              CPU & Hardware
+              <span class="det-nav-badge" id="nb-hardware">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-gpu')" data-sec="sec-gpu">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7V5M10 7V5M14 7V5M18 7V5M6 17v2M10 17v2M14 17v2M18 17v2"/></svg>
+              GPU & Graphics
+              <span class="det-nav-badge" id="nb-gpu">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-network')" data-sec="sec-network">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+              Network & Connectivity
+              <span class="det-nav-badge" id="nb-network">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-battery')" data-sec="sec-battery">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="18" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+              Battery
+              <span class="det-nav-badge" id="nb-battery">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-sensors')" data-sec="sec-sensors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20"/><path d="M12 12v-2a2 2 0 0 1 2-2h2"/></svg>
+              Sensors & Input
+              <span class="det-nav-badge" id="nb-sensors">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-features')" data-sec="sec-features">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Feature Support
+              <span class="det-nav-badge" id="nb-features">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-media')" data-sec="sec-media">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              Media Devices
+              <span class="det-nav-badge" id="nb-media">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-geo')" data-sec="sec-geo">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Geolocation
+              <span class="det-nav-badge" id="nb-geo">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-fingerprint')" data-sec="sec-fingerprint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 1 5 5c0 3-2 5.5-5 8-3-2.5-5-5-5-8a5 5 0 0 1 5-5z"/><path d="M12 2c-2.76 0-5 2.24-5 5 0 3.53 2.61 6.44 5 8 2.39-1.56 5-4.47 5-8 0-2.76-2.24-5-5-5z" opacity=".3"/></svg>
+              Device Fingerprint
+              <span class="det-nav-badge" id="nb-fp">–</span>
+            </div>
+            <div class="det-nav-item" onclick="scrollTo('sec-ua')" data-sec="sec-ua">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              User Agent
+              <span class="det-nav-badge" id="nb-ua">–</span>
+            </div>
+          </nav>
+
+          <!-- ── Sections ── -->
+          <div id="sectionsContainer">
+
+            <!-- §1 Browser -->
+            <div class="det-section" id="sec-browser">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                <div>
+                  <div class="det-section-title">Browser</div>
+                  <div class="det-section-sub">Browser engine, version, and rendering details</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-browser">Detected</span>
+              </div>
+              <div class="info-grid" id="grid-browser"></div>
+            </div>
+
+            <!-- §2 OS -->
+            <div class="det-section" id="sec-os">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                <div>
+                  <div class="det-section-title">Operating System</div>
+                  <div class="det-section-sub">Platform, OS version, and architecture</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-os">Detected</span>
+              </div>
+              <div class="info-grid" id="grid-os"></div>
+            </div>
+
+            <!-- §3 Screen -->
+            <div class="det-section" id="sec-screen">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                <div>
+                  <div class="det-section-title">Screen &amp; Display</div>
+                  <div class="det-section-sub">Resolution, DPR, color depth, HDR support</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-screen">Detected</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;">
+                <div class="info-grid" id="grid-screen"></div>
+                <div class="screen-visual">
+                  <div class="screen-device-frame">
+                    <div class="screen-notch"></div>
+                    <div class="screen-display">
+                      <div class="screen-dpr-label" id="screenDprLabel">–</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- §4 Hardware -->
+            <div class="det-section" id="sec-hardware">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+                <div>
+                  <div class="det-section-title">CPU &amp; Hardware</div>
+                  <div class="det-section-sub">Processor threads, memory, and device class</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-hardware">Detected</span>
+              </div>
+              <div class="info-grid" id="grid-hardware"></div>
+            </div>
+
+            <!-- §5 GPU -->
+            <div class="det-section" id="sec-gpu">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7V5M10 7V5M14 7V5M18 7V5M6 17v2M10 17v2M14 17v2M18 17v2"/></svg></div>
+                <div>
+                  <div class="det-section-title">GPU &amp; Graphics</div>
+                  <div class="det-section-sub">WebGL renderer, vendor, and graphics capabilities</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-gpu">Detected</span>
+              </div>
+              <div class="info-grid wide" id="grid-gpu"></div>
+            </div>
+
+            <!-- §6 Network -->
+            <div class="det-section" id="sec-network">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+                <div>
+                  <div class="det-section-title">Network &amp; Connectivity</div>
+                  <div class="det-section-sub">Connection type, speed, and online status</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-network">Detected</span>
+              </div>
+              <div class="info-grid" id="grid-network"></div>
+            </div>
+
+            <!-- §7 Battery -->
+            <div class="det-section" id="sec-battery">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="18" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg></div>
+                <div>
+                  <div class="det-section-title">Battery</div>
+                  <div class="det-section-sub">Battery level, charging status, and time estimates</div>
+                </div>
+                <span class="det-section-badge" id="sb-battery">Checking…</span>
+              </div>
+              <div id="battery-content">
+                <p style="font-size:0.85rem;color:var(--text-3);">Requesting battery info…</p>
+              </div>
+            </div>
+
+            <!-- §8 Sensors -->
+            <div class="det-section" id="sec-sensors">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 0 20"/><path d="M12 12v-2a2 2 0 0 1 2-2h2"/></svg></div>
+                <div>
+                  <div class="det-section-title">Sensors &amp; Input</div>
+                  <div class="det-section-sub">Available device sensors and input capabilities</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-sensors">Detected</span>
+              </div>
+              <div class="feature-grid" id="grid-sensors"></div>
+            </div>
+
+            <!-- §9 Feature Support -->
+            <div class="det-section" id="sec-features">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+                <div>
+                  <div class="det-section-title">Feature Support</div>
+                  <div class="det-section-sub">Web APIs, CSS features, and browser capabilities</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-features">Checked</span>
+              </div>
+              <div class="view-tabs">
+                <button class="view-tab active" onclick="switchFeatureView('api',this)">Web APIs</button>
+                <button class="view-tab" onclick="switchFeatureView('css',this)">CSS Features</button>
+                <button class="view-tab" onclick="switchFeatureView('media',this)">Media</button>
+              </div>
+              <div class="feature-grid" id="grid-features-api"></div>
+              <div class="feature-grid" id="grid-features-css" style="display:none;"></div>
+              <div class="feature-grid" id="grid-features-media" style="display:none;"></div>
+            </div>
+
+            <!-- §10 Media Devices -->
+            <div class="det-section" id="sec-media">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+                <div>
+                  <div class="det-section-title">Media Devices</div>
+                  <div class="det-section-sub">Cameras, microphones, and output devices</div>
+                </div>
+                <span class="det-section-badge" id="sb-media">Checking…</span>
+              </div>
+              <div class="info-grid" id="grid-media">
+                <div class="info-card"><div class="info-card-label">Status</div><div class="info-card-value small">Click "Detect Cameras" to enumerate devices</div></div>
+              </div>
+              <button class="btn btn-ghost" style="margin-top:12px;font-size:0.85rem;" onclick="detectMediaDevices()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                Detect Cameras &amp; Microphones
+              </button>
+            </div>
+
+            <!-- §11 Geolocation -->
+            <div class="det-section" id="sec-geo">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div>
+                  <div class="det-section-title">Geolocation</div>
+                  <div class="det-section-sub">GPS coordinates and timezone information</div>
+                </div>
+                <span class="det-section-badge" id="sb-geo">Not requested</span>
+              </div>
+              <div class="info-grid" id="grid-geo">
+                <div class="info-card">
+                  <div class="info-card-label">Timezone</div>
+                  <div class="info-card-value" id="tz-val">–</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">UTC Offset</div>
+                  <div class="info-card-value" id="utc-val">–</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Locale</div>
+                  <div class="info-card-value" id="locale-val">–</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Language</div>
+                  <div class="info-card-value" id="lang-val">–</div>
+                </div>
+              </div>
+              <div id="geo-result" style="margin-top:14px;"></div>
+              <button class="btn btn-ghost" style="margin-top:12px;font-size:0.85rem;" onclick="requestGeo()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Request GPS Coordinates
+              </button>
+            </div>
+
+            <!-- §12 Fingerprint -->
+            <div class="det-section" id="sec-fingerprint">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div>
+                  <div class="det-section-title">Device Fingerprint</div>
+                  <div class="det-section-sub">Unique device signature based on browser signals</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-fp">Generated</span>
+              </div>
+              <div class="fingerprint-card" id="fingerprint-card">
+                <div style="font-size:0.75rem;color:var(--text-3);margin-bottom:6px;">SHA-256 Device Hash</div>
+                <div class="fp-hash" id="fp-hash">Computing…</div>
+                <div id="fp-components"></div>
+              </div>
+            </div>
+
+            <!-- §13 User Agent -->
+            <div class="det-section" id="sec-ua">
+              <div class="det-section-hdr">
+                <div class="det-section-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                <div>
+                  <div class="det-section-title">User Agent</div>
+                  <div class="det-section-sub">Raw and parsed user agent string</div>
+                </div>
+                <span class="det-section-badge sbc-ok" id="sb-ua">Parsed</span>
+              </div>
+              <div class="ua-raw" id="ua-raw-display">–</div>
+              <div style="margin-bottom:14px;" id="ua-tokens"></div>
+              <div class="info-grid wide" id="grid-ua"></div>
+            </div>
+
+          </div><!-- /sectionsContainer -->
+        </div><!-- /detector-layout -->
+
+      </div><!-- /container -->
+    </div><!-- /page-body -->
+  </main>
+
+  <div id="footer-root"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="pages.js"></script>
+
+<script>
+/* ════════════════════════════════════
+   Mobile Device Detector – Full App
+════════════════════════════════════ */
+
+const toastEl = document.getElementById('toast');
+function showToast(msg, dur = 3000) {
+  toastEl.textContent = msg; toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), dur);
+}
+
+/* ── Info card builders ── */
+function infoCard(label, value, sub = '', type = 'normal', badgeClass = '') {
+  const valClass = type === 'mono' ? 'mono' : type === 'small' ? 'small' : '';
+  return `<div class="info-card">
+    <div class="info-card-label">${label}</div>
+    <div class="info-card-value ${valClass}">${value || '–'}</div>
+    ${sub ? `<div class="info-card-sub">${sub}</div>` : ''}
+    ${badgeClass ? `<div class="info-card-badge ${badgeClass}">${badgeClass.includes('ok') ? '✓ Yes' : '✗ No'}</div>` : ''}
+  </div>`;
+}
+
+function infoCardWide(label, value, sub = '') {
+  return `<div class="info-card" style="grid-column:1/-1;">
+    <div class="info-card-label">${label}</div>
+    <div class="info-card-value mono">${value || '–'}</div>
+    ${sub ? `<div class="info-card-sub">${sub}</div>` : ''}
+  </div>`;
+}
+
+function featItem(name, supported, detail = '') {
+  const cls = supported === true ? 'yes' : supported === 'partial' ? 'partial' : 'no';
+  const lbl = supported === true ? '✓' : supported === 'partial' ? '~' : '✗';
+  return `<div class="feat-item" title="${detail}">
+    <div class="feat-dot ${cls}"></div>
+    <span>${name}</span>
+    <span style="margin-left:auto;font-size:0.68rem;color:var(--text-3);">${lbl}</span>
+  </div>`;
+}
+
+function progressBar(pct, warn = false) {
+  const cls = pct > 80 ? '' : pct > 40 ? 'warn' : 'low';
+  return `<div class="prog-wrap"><div class="prog-track"><div class="prog-fill ${cls}" style="width:${pct}%"></div></div></div>`;
+}
+
+/* ── UA Parser ── */
+function parseUA(ua) {
+  const result = { browser: 'Unknown', browserVer: '', engine: '', engineVer: '', os: 'Unknown', osVer: '', device: 'Unknown', deviceType: 'Desktop', mobile: false };
+  const u = ua;
+
+  // Mobile check
+  result.mobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(u);
+
+  // Device type
+  if (/iPad/i.test(u) || (/Macintosh/i.test(u) && navigator.maxTouchPoints > 1)) result.deviceType = 'Tablet';
+  else if (/iPhone|iPod/i.test(u)) result.deviceType = 'Phone';
+  else if (/Android/i.test(u) && /Mobile/i.test(u)) result.deviceType = 'Phone';
+  else if (/Android/i.test(u)) result.deviceType = 'Tablet';
+  else if (result.mobile) result.deviceType = 'Mobile';
+  else result.deviceType = 'Desktop';
+
+  // Browser
+  if (/Edg\//i.test(u)) { result.browser = 'Microsoft Edge'; result.browserVer = (u.match(/Edg\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/OPR\//i.test(u)) { result.browser = 'Opera'; result.browserVer = (u.match(/OPR\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/Opera/i.test(u)) { result.browser = 'Opera Legacy'; result.browserVer = (u.match(/Version\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/SamsungBrowser/i.test(u)) { result.browser = 'Samsung Internet'; result.browserVer = (u.match(/SamsungBrowser\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/UCBrowser/i.test(u)) { result.browser = 'UC Browser'; result.browserVer = (u.match(/UCBrowser\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/YaBrowser/i.test(u)) { result.browser = 'Yandex Browser'; result.browserVer = (u.match(/YaBrowser\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/DuckDuckGo/i.test(u)) { result.browser = 'DuckDuckGo'; result.browserVer = (u.match(/DuckDuckGo\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/CriOS/i.test(u)) { result.browser = 'Chrome (iOS)'; result.browserVer = (u.match(/CriOS\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/FxiOS/i.test(u)) { result.browser = 'Firefox (iOS)'; result.browserVer = (u.match(/FxiOS\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/Firefox/i.test(u)) { result.browser = 'Firefox'; result.browserVer = (u.match(/Firefox\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/Chrome/i.test(u)) { result.browser = 'Google Chrome'; result.browserVer = (u.match(/Chrome\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/Safari/i.test(u)) { result.browser = 'Safari'; result.browserVer = (u.match(/Version\/([0-9.]+)/i)||[])[1]||''; }
+
+  // Engine
+  if (/Gecko\/[0-9]/i.test(u) && /Firefox/i.test(u)) { result.engine = 'Gecko'; result.engineVer = (u.match(/rv:([0-9.]+)/i)||[])[1]||''; }
+  else if (/WebKit/i.test(u)) { result.engine = 'WebKit/Blink'; result.engineVer = (u.match(/WebKit\/([0-9.]+)/i)||[])[1]||''; }
+  else if (/Trident/i.test(u)) { result.engine = 'Trident'; result.engineVer = (u.match(/Trident\/([0-9.]+)/i)||[])[1]||''; }
+
+  // OS
+  if (/Windows NT 10.0/i.test(u)) { result.os = 'Windows'; result.osVer = '10/11'; }
+  else if (/Windows NT 6.3/i.test(u)) { result.os = 'Windows'; result.osVer = '8.1'; }
+  else if (/Windows NT 6.2/i.test(u)) { result.os = 'Windows'; result.osVer = '8'; }
+  else if (/Windows NT 6.1/i.test(u)) { result.os = 'Windows'; result.osVer = '7'; }
+  else if (/Windows/i.test(u)) { result.os = 'Windows'; result.osVer = '(Older)'; }
+  else if (/iPhone OS/i.test(u)) { result.os = 'iOS'; result.osVer = ((u.match(/iPhone OS ([0-9_]+)/i)||[])[1]||'').replace(/_/g,'.'); }
+  else if (/iPad.*OS/i.test(u)) { result.os = 'iPadOS'; result.osVer = ((u.match(/OS ([0-9_]+)/i)||[])[1]||'').replace(/_/g,'.'); }
+  else if (/Mac OS X/i.test(u)) { result.os = 'macOS'; result.osVer = ((u.match(/Mac OS X ([0-9_.]+)/i)||[])[1]||'').replace(/_/g,'.'); }
+  else if (/Android/i.test(u)) { result.os = 'Android'; result.osVer = (u.match(/Android ([0-9.]+)/i)||[])[1]||''; }
+  else if (/Linux/i.test(u)) { result.os = 'Linux'; }
+  else if (/CrOS/i.test(u)) { result.os = 'Chrome OS'; }
+
+  return result;
+}
+
+/* ── WebGL GPU Info ── */
+function getGPUInfo() {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return { vendor: 'Not available', renderer: 'WebGL not supported', version: '–' };
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    const vendor = debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR);
+    const renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+    const version = gl.getParameter(gl.VERSION);
+    const glslVersion = gl.getParameter(gl.SHADING_LANGUAGE_VERSION);
+    const maxTexture = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    const maxViewport = gl.getParameter(gl.MAX_VIEWPORT_DIMS);
+    const extensions = gl.getSupportedExtensions() || [];
+    return { vendor, renderer, version, glslVersion, maxTexture, maxViewport: maxViewport ? maxViewport[0] + 'x' + maxViewport[1] : '–', extensionCount: extensions.length, isWebGL2: !!canvas.getContext('webgl2') };
+  } catch { return { vendor: '–', renderer: '–', version: '–' }; }
+}
+
+/* ── Simple hash ── */
+async function hashString(str) {
+  const buf = new TextEncoder().encode(str);
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+/* ── Main detection ── */
+async function detectAll() {
+  const ua = navigator.userAgent;
+  const parsed = parseUA(ua);
+  let totalScore = 0, maxScore = 0;
+
+  /* ── Browser section ── */
+  {
+    const data = {
+      'Browser': parsed.browser,
+      'Version': parsed.browserVer,
+      'Engine': parsed.engine,
+      'Engine Version': parsed.engineVer,
+      'Cookies Enabled': navigator.cookieEnabled ? 'Enabled' : 'Disabled',
+      'Do Not Track': navigator.doNotTrack === '1' ? 'Enabled' : navigator.doNotTrack === '0' ? 'Disabled' : 'Unspecified',
+      'JavaScript': 'Enabled',
+      'Popup Blocker': window.outerWidth ? 'Likely Off' : '–',
+    };
+    document.getElementById('grid-browser').innerHTML = Object.entries(data).map(([k,v]) => infoCard(k, v)).join('');
+    document.getElementById('nb-browser').textContent = parsed.browser;
+    document.getElementById('nb-browser').className = 'det-nav-badge';
+    totalScore += 8; maxScore += 8;
+  }
+
+  /* ── OS section ── */
+  {
+    const platform = navigator.platform || 'Unknown';
+    const arch = ua.includes('x86_64') || ua.includes('Win64') || ua.includes('WOW64') ? '64-bit' :
+                 ua.includes('arm') || ua.includes('ARM') ? 'ARM' : ua.includes('i686') ? '32-bit' : 'Unknown';
+    document.getElementById('grid-os').innerHTML = [
+      infoCard('Operating System', parsed.os),
+      infoCard('Version', parsed.osVer),
+      infoCard('Architecture', arch),
+      infoCard('Platform', platform),
+      infoCard('Device Type', parsed.deviceType),
+      infoCard('Touch Points', navigator.maxTouchPoints, 'Max simultaneous'),
+      infoCard('Language', navigator.language),
+      infoCard('Languages', (navigator.languages || [navigator.language]).join(', '), null, 'small'),
+    ].join('');
+    document.getElementById('nb-os').textContent = parsed.os;
+    document.getElementById('nb-os').className = 'det-nav-badge';
+    totalScore += 8; maxScore += 8;
+  }
+
+  /* ── Screen section ── */
+  {
+    const dpr = window.devicePixelRatio || 1;
+    const sw = screen.width, sh = screen.height;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const colorDepth = screen.colorDepth;
+    const pixelDepth = screen.pixelDepth;
+    const orientation = screen.orientation ? screen.orientation.type : (window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+    const hdr = window.matchMedia('(dynamic-range: high)').matches;
+    const p3 = window.matchMedia('(color-gamut: p3)').matches;
+    const rec2020 = window.matchMedia('(color-gamut: rec2020)').matches;
+    const physW = Math.round(sw * dpr), physH = Math.round(sh * dpr);
+    const ppi = Math.round(Math.sqrt(physW**2 + physH**2) / 6.5);
+
+    document.getElementById('grid-screen').innerHTML = [
+      infoCard('Screen Resolution', `${sw} × ${sh} px`, 'Logical pixels'),
+      infoCard('Physical Resolution', `${physW} × ${physH} px`, `Device pixels (×${dpr} DPR)`),
+      infoCard('Viewport Size', `${vw} × ${vh} px`, 'Available area'),
+      infoCard('Device Pixel Ratio', dpr.toFixed(2) + 'x', dpr >= 3 ? 'High DPI (Retina/AMOLED)' : dpr >= 2 ? 'High DPI' : 'Standard'),
+      infoCard('Color Depth', colorDepth + ' bit', pixelDepth + '-bit pixel depth'),
+      infoCard('Color Gamut', rec2020 ? 'rec2020' : p3 ? 'DCI-P3' : 'sRGB'),
+      infoCard('HDR Support', hdr ? 'Yes' : 'Standard'),
+      infoCard('Orientation', orientation.replace(/-/g,' '), ''),
+      infoCard('Estimated PPI', '~' + ppi, 'Pixels per inch estimate'),
+      infoCard('Dark Mode', window.matchMedia('(prefers-color-scheme:dark)').matches ? 'Enabled' : 'Disabled'),
+      infoCard('Reduced Motion', window.matchMedia('(prefers-reduced-motion:reduce)').matches ? 'Requested' : 'Normal'),
+      infoCard('Forced Colors', window.matchMedia('(forced-colors:active)').matches ? 'Active' : 'Off'),
+    ].join('');
+
+    document.getElementById('screenDprLabel').innerHTML = `${sw}×${sh}<br>${dpr}x DPR`;
+    document.getElementById('nb-screen').textContent = `${sw}×${sh}`;
+    document.getElementById('nb-screen').className = 'det-nav-badge';
+    totalScore += 10; maxScore += 10;
+  }
+
+  /* ── Hardware section ── */
+  {
+    const cores = navigator.hardwareConcurrency || 'Unknown';
+    const mem = navigator.deviceMemory;
+    const memStr = mem ? `${mem} GB` : 'Not disclosed';
+    const perfNow = (performance.now() / 1000).toFixed(3);
+
+    document.getElementById('grid-hardware').innerHTML = [
+      infoCard('CPU Threads', String(cores), cores >= 8 ? 'High-end' : cores >= 4 ? 'Mid-range' : 'Entry-level'),
+      infoCard('Device Memory', memStr, 'Rounded by browser'),
+      infoCard('Time Origin', perfNow + 's', 'Since page load'),
+      infoCard('Max Touch Points', String(navigator.maxTouchPoints), navigator.maxTouchPoints > 0 ? 'Touch enabled' : 'No touch'),
+      infoCard('Input Type', navigator.maxTouchPoints > 0 ? 'Touch + Pointer' : 'Pointer only'),
+      infoCard('PDF Viewer', navigator.pdfViewerEnabled ? 'Built-in' : 'External required'),
+      infoCard('Java Enabled', 'Deprecated', 'No longer available'),
+      infoCard('WebGL', getGPUInfo().isWebGL2 ? 'WebGL 2.0' : 'WebGL 1.0'),
+    ].join('');
+    document.getElementById('nb-hardware').textContent = `${cores} cores`;
+    document.getElementById('nb-hardware').className = 'det-nav-badge';
+    totalScore += 6; maxScore += 8;
+  }
+
+  /* ── GPU section ── */
+  {
+    const gpu = getGPUInfo();
+    document.getElementById('grid-gpu').innerHTML = [
+      infoCard('GPU Vendor', gpu.vendor, null, 'small'),
+      infoCard('GPU Renderer', gpu.renderer, null, 'small'),
+      infoCard('WebGL Version', gpu.isWebGL2 ? 'WebGL 2.0' : 'WebGL 1.0'),
+      infoCard('GLSL Version', gpu.glslVersion, null, 'small'),
+      infoCard('Max Texture Size', gpu.maxTexture + 'px', 'Largest supported texture'),
+      infoCard('Max Viewport', gpu.maxViewport, 'Maximum render viewport'),
+      infoCard('Extensions', gpu.extensionCount + ' available', 'WebGL extensions'),
+      infoCardWide('Full Renderer String', gpu.renderer),
+    ].join('');
+    document.getElementById('nb-gpu').textContent = gpu.isWebGL2 ? 'WebGL2' : 'WebGL1';
+    document.getElementById('nb-gpu').className = 'det-nav-badge';
+    totalScore += 6; maxScore += 6;
+  }
+
+  /* ── Network section ── */
+  {
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const online = navigator.onLine;
+    const type = conn ? (conn.type || conn.effectiveType || '–') : '–';
+    const effectiveType = conn ? (conn.effectiveType || '–') : '–';
+    const downlink = conn ? (conn.downlink ? conn.downlink + ' Mbps' : '–') : '–';
+    const rtt = conn ? (conn.rtt ? conn.rtt + ' ms' : '–') : '–';
+    const saveData = conn ? (conn.saveData ? 'Enabled' : 'Disabled') : '–';
+    const downlinkMax = conn && conn.downlinkMax ? conn.downlinkMax + ' Mbps' : '–';
+
+    const bars = effectiveType === '4g' ? 4 : effectiveType === '3g' ? 3 : effectiveType === '2g' ? 2 : effectiveType === 'slow-2g' ? 1 : 4;
+
+    document.getElementById('grid-network').innerHTML = [
+      infoCard('Status', online ? '🟢 Online' : '🔴 Offline', ''),
+      infoCard('Connection Type', type === '–' ? 'WiFi / Ethernet' : type),
+      infoCard('Effective Type', effectiveType),
+      infoCard('Estimated Downlink', downlink),
+      infoCard('Round Trip Time', rtt, 'Network latency estimate'),
+      infoCard('Data Saver', saveData),
+      infoCard('Max Downlink', downlinkMax),
+      infoCard('Connection API', conn ? 'Available' : 'Limited'),
+    ].join('');
+    document.getElementById('nb-network').textContent = online ? 'Online' : 'Offline';
+    document.getElementById('nb-network').className = 'det-nav-badge' + (online ? '' : ' no');
+    totalScore += 5; maxScore += 8;
+  }
+
+  /* ── Battery section ── */
+  if ('getBattery' in navigator) {
+    try {
+      const battery = await navigator.getBattery();
+      const pct = Math.round(battery.level * 100);
+      const charging = battery.charging;
+      const chargeTime = battery.chargingTime === Infinity ? '–' : battery.chargingTime ? Math.round(battery.chargingTime / 60) + ' min' : '–';
+      const dischargeTime = battery.dischargingTime === Infinity ? '–' : battery.dischargingTime ? Math.round(battery.dischargingTime / 60) + ' min' : '–';
+      const fillCls = pct > 50 ? '' : pct > 20 ? ' med' : ' low';
+
+      document.getElementById('battery-content').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;">
+          <div>
+            <div class="battery-widget">
+              <div class="battery-body">
+                <div class="battery-fill${fillCls}" style="width:${pct}%;"></div>
+              </div>
+              <div class="battery-info">
+                <div class="battery-pct">${pct}%${charging ? ' <svg class="charging-bolt" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>' : ''}</div>
+                <div class="battery-status">${charging ? '⚡ Charging' : 'On battery'}</div>
+              </div>
+            </div>
+            ${progressBar(pct)}
+          </div>
+          <div class="info-grid" style="grid-template-columns:1fr;">
+            ${infoCard('Level', pct + '%')}
+            ${infoCard('Status', charging ? '⚡ Charging' : 'Discharging')}
+            ${chargeTime !== '–' ? infoCard('Time to Full', chargeTime) : ''}
+            ${dischargeTime !== '–' ? infoCard('Time Remaining', dischargeTime) : ''}
+          </div>
+        </div>`;
+      document.getElementById('sb-battery').textContent = pct + '%';
+      document.getElementById('sb-battery').className = 'det-section-badge ' + (pct > 50 ? 'sbc-ok' : pct > 20 ? 'sbc-warn' : 'sbc-na');
+      document.getElementById('nb-battery').textContent = pct + '%';
+      document.getElementById('nb-battery').className = 'det-nav-badge' + (pct <= 20 ? ' no' : pct <= 50 ? ' warn' : '');
+      totalScore += 4; maxScore += 4;
+    } catch {
+      document.getElementById('battery-content').innerHTML = infoCard('Battery API', 'Permission denied or unavailable', 'Try on a mobile device');
+      document.getElementById('sb-battery').textContent = 'N/A';
+      document.getElementById('sb-battery').className = 'det-section-badge sbc-na';
+      maxScore += 4;
+    }
+  } else {
+    document.getElementById('battery-content').innerHTML = infoCard('Battery API', 'Not supported', 'Not available in this browser');
+    document.getElementById('sb-battery').textContent = 'N/A';
+    document.getElementById('sb-battery').className = 'det-section-badge sbc-na';
+    maxScore += 4;
+  }
+
+  /* ── Sensors section ── */
+  {
+    const sensors = [
+      ['Accelerometer', 'DeviceMotionEvent' in window],
+      ['Gyroscope', 'DeviceOrientationEvent' in window],
+      ['Magnetometer', 'ondeviceorientationabsolute' in window],
+      ['Proximity Sensor', 'ondeviceproximity' in window || 'ProximitySensor' in window],
+      ['Ambient Light', 'ondevicelight' in window || 'AmbientLightSensor' in window],
+      ['Vibration API', 'vibrate' in navigator],
+      ['Touch Support', navigator.maxTouchPoints > 0],
+      ['Multi-touch', navigator.maxTouchPoints > 1],
+      ['Pointer Events', 'PointerEvent' in window],
+      ['Force Touch', 'ontouchforcechange' in window],
+      ['GamePad API', 'getGamepads' in navigator],
+      ['USB (WebUSB)', 'usb' in navigator],
+      ['Bluetooth', 'bluetooth' in navigator],
+      ['NFC', 'NDEFReader' in window],
+    ];
+    document.getElementById('grid-sensors').innerHTML = sensors.map(([n,s]) => featItem(n, s)).join('');
+    const supported = sensors.filter(s => s[1]).length;
+    document.getElementById('nb-sensors').textContent = supported + '/' + sensors.length;
+    document.getElementById('nb-sensors').className = 'det-nav-badge';
+    totalScore += supported; maxScore += sensors.length;
+  }
+
+  /* ── Feature Support ── */
+  {
+    const apis = [
+      ['Service Worker', 'serviceWorker' in navigator],
+      ['Web Workers', 'Worker' in window],
+      ['WebAssembly', 'WebAssembly' in window],
+      ['Clipboard API', 'clipboard' in navigator],
+      ['Web Share API', 'share' in navigator],
+      ['Web Push API', 'PushManager' in window],
+      ['Notifications', 'Notification' in window],
+      ['Geolocation', 'geolocation' in navigator],
+      ['IndexedDB', 'indexedDB' in window],
+      ['localStorage', (() => { try { return !!localStorage; } catch { return false; }})()],
+      ['sessionStorage', (() => { try { return !!sessionStorage; } catch { return false; }})()],
+      ['Cache API', 'caches' in window],
+      ['WebRTC', 'RTCPeerConnection' in window],
+      ['WebSockets', 'WebSocket' in window],
+      ['Fetch API', 'fetch' in window],
+      ['Intersection Observer', 'IntersectionObserver' in window],
+      ['Resize Observer', 'ResizeObserver' in window],
+      ['MutationObserver', 'MutationObserver' in window],
+      ['Performance API', 'performance' in window],
+      ['Web Animations API', 'Animation' in window],
+      ['Web Audio API', 'AudioContext' in window || 'webkitAudioContext' in window],
+      ['WebGL', (() => { try { return !!document.createElement('canvas').getContext('webgl'); } catch { return false; }})()],
+      ['Canvas 2D', (() => { try { return !!document.createElement('canvas').getContext('2d'); } catch { return false; }})()],
+      ['OffscreenCanvas', 'OffscreenCanvas' in window],
+      ['Web Crypto API', 'crypto' in window && 'subtle' in crypto],
+      ['Payment Request', 'PaymentRequest' in window],
+      ['Credential Mgmt', 'PasswordCredential' in window],
+    ];
+
+    const cssFeats = [
+      ['CSS Grid', CSS.supports('display','grid')],
+      ['CSS Flexbox', CSS.supports('display','flex')],
+      ['CSS Custom Props', CSS.supports('--a','b')],
+      ['CSS Container Queries', CSS.supports('container-type','inline-size')],
+      ['CSS Subgrid', CSS.supports('grid-template-rows','subgrid')],
+      ['CSS Layers', CSS.supports('@layer', '')],
+      ['aspect-ratio', CSS.supports('aspect-ratio','1')],
+      ['clamp()', CSS.supports('width','clamp(1px,2px,3px)')],
+      ['min()/max()', CSS.supports('width','min(1px,2px)')],
+      ['color-mix()', CSS.supports('color','color-mix(in srgb,red,blue)')],
+      ['backdrop-filter', CSS.supports('backdrop-filter','blur(1px)') || CSS.supports('-webkit-backdrop-filter','blur(1px)')],
+      ['CSS Animations', CSS.supports('animation','a 1s')],
+      ['CSS Transitions', CSS.supports('transition','all 1s')],
+      ['Scroll Snap', CSS.supports('scroll-snap-type','y mandatory')],
+      ['CSS Nesting', CSS.supports('selector(&)')],
+      ['has() selector', CSS.supports('selector(:has(a))')],
+      ['scroll-behavior', CSS.supports('scroll-behavior','smooth')],
+      ['overscroll-behavior', CSS.supports('overscroll-behavior','contain')],
+      ['Gap (flex/grid)', CSS.supports('gap','1px')],
+    ];
+
+    const mediaFeats = [
+      ['Video (MP4/H.264)', (() => { const v = document.createElement('video'); return v.canPlayType('video/mp4; codecs="avc1.42E01E"') !== ''; })()],
+      ['Video (WebM/VP9)', (() => { const v = document.createElement('video'); return v.canPlayType('video/webm; codecs="vp9"') !== ''; })()],
+      ['Video (AV1)', (() => { const v = document.createElement('video'); return v.canPlayType('video/webm; codecs="av01.0.05M.08"') !== ''; })()],
+      ['Audio (MP3)', (() => { const a = document.createElement('audio'); return a.canPlayType('audio/mpeg') !== ''; })()],
+      ['Audio (OGG)', (() => { const a = document.createElement('audio'); return a.canPlayType('audio/ogg; codecs="vorbis"') !== ''; })()],
+      ['Audio (FLAC)', (() => { const a = document.createElement('audio'); return a.canPlayType('audio/flac') !== ''; })()],
+      ['Audio (AAC)', (() => { const a = document.createElement('audio'); return a.canPlayType('audio/aac') !== ''; })()],
+      ['Image (WebP)', (() => { const c = document.createElement('canvas'); return c.toDataURL('image/webp').startsWith('data:image/webp'); })()],
+      ['Image (AVIF)', 'createImageBitmap' in window],
+      ['MediaRecorder', 'MediaRecorder' in window],
+      ['Media Session', 'mediaSession' in navigator],
+      ['Picture-in-Picture', 'pictureInPictureEnabled' in document],
+      ['Screen Capture', 'getDisplayMedia' in (navigator.mediaDevices || {})],
+      ['Camera (getUserMedia)', 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices],
+    ];
+
+    document.getElementById('grid-features-api').innerHTML = apis.map(([n,s]) => featItem(n, s)).join('');
+    document.getElementById('grid-features-css').innerHTML = cssFeats.map(([n,s]) => featItem(n, s)).join('');
+    document.getElementById('grid-features-media').innerHTML = mediaFeats.map(([n,s]) => featItem(n, s)).join('');
+
+    const total = apis.filter(a=>a[1]).length + cssFeats.filter(a=>a[1]).length;
+    document.getElementById('nb-features').textContent = total + '+';
+    document.getElementById('nb-features').className = 'det-nav-badge';
+    totalScore += total * 0.5; maxScore += (apis.length + cssFeats.length) * 0.5;
+  }
+
+  /* ── Geolocation timezone ── */
+  {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const offset = -(new Date().getTimezoneOffset());
+    const offsetStr = (offset >= 0 ? '+' : '') + Math.floor(offset/60) + ':' + String(Math.abs(offset%60)).padStart(2,'0');
+    document.getElementById('tz-val').textContent = tz;
+    document.getElementById('utc-val').textContent = 'UTC' + offsetStr;
+    document.getElementById('locale-val').textContent = Intl.DateTimeFormat().resolvedOptions().locale || navigator.language;
+    document.getElementById('lang-val').textContent = (navigator.languages || [navigator.language]).join(', ');
+    document.getElementById('nb-geo').textContent = tz.split('/').pop().replace(/_/g,' ');
+    document.getElementById('nb-geo').className = 'det-nav-badge';
+    totalScore += 2; maxScore += 4;
+  }
+
+  /* ── UA tokens ── */
+  {
+    const ua2 = navigator.userAgent;
+    document.getElementById('ua-raw-display').textContent = ua2;
+    const tokens = [];
+    const bMatch = ua2.match(/(Chrome|Firefox|Safari|Edg|OPR|SamsungBrowser|CriOS|FxiOS)\/[\d.]+/i);
+    const osMatch = ua2.match(/(Windows NT[\d. ]+|Mac OS X[\d_.]+|Android[\d. ]+|iPhone OS[\d_]+|iPadOS[\d_.]+|Linux)/i);
+    const engMatch = ua2.match(/(WebKit|Gecko|Trident)\/[\d.]+/i);
+    if (bMatch) tokens.push(`<span class="ua-token ua-browser">${bMatch[0]}</span>`);
+    if (osMatch) tokens.push(`<span class="ua-token ua-os">${osMatch[0]}</span>`);
+    if (engMatch) tokens.push(`<span class="ua-token ua-engine">${engMatch[0]}</span>`);
+    if (parsed.deviceType !== 'Desktop') tokens.push(`<span class="ua-token ua-device">${parsed.deviceType}</span>`);
+    document.getElementById('ua-tokens').innerHTML = tokens.join('');
+
+    document.getElementById('grid-ua').innerHTML = [
+      infoCard('Browser', parsed.browser + ' ' + parsed.browserVer),
+      infoCard('Engine', parsed.engine + ' ' + parsed.engineVer),
+      infoCard('OS', parsed.os + ' ' + parsed.osVer),
+      infoCard('Device Type', parsed.deviceType),
+      infoCard('Mobile', parsed.mobile ? 'Yes' : 'No'),
+      infoCard('UA Length', ua2.length + ' chars', null, 'small'),
+      infoCardWide('Raw User Agent', ua2),
+    ].join('');
+    document.getElementById('nb-ua').textContent = parsed.browser;
+    document.getElementById('nb-ua').className = 'det-nav-badge';
+    totalScore += 4; maxScore += 4;
+  }
+
+  /* ── Device fingerprint ── */
+  {
+    const components = {
+      'UA Hash': hashString(navigator.userAgent),
+      'Screen': `${screen.width}x${screen.height}x${screen.colorDepth}@${window.devicePixelRatio}`,
+      'Timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+      'Language': navigator.language,
+      'Cores': String(navigator.hardwareConcurrency),
+      'Touch': String(navigator.maxTouchPoints),
+      'GPU': getGPUInfo().renderer.slice(0, 40),
+    };
+
+    const fingerStr = Object.values(components).join('|');
+    const fp = await hashString(fingerStr);
+
+    document.getElementById('fp-hash').textContent = fp;
+    document.getElementById('fp-components').innerHTML = Object.entries(components).map(([k,v]) => {
+      const val = v instanceof Promise ? '…' : v;
+      return `<div class="fp-component"><span class="fp-key">${k}</span><span class="fp-val">${String(val).slice(0,50)}</span></div>`;
+    }).join('');
+
+    document.getElementById('nb-fp').textContent = fp.slice(0,8) + '…';
+    document.getElementById('nb-fp').className = 'det-nav-badge';
+    totalScore += 4; maxScore += 4;
+  }
+
+  /* ── Hero card update ── */
+  {
+    document.getElementById('heroDeviceType').textContent = parsed.deviceType + ' · ' + parsed.os;
+    document.getElementById('heroDeviceName').textContent = parsed.browser + ' ' + (parsed.browserVer.split('.')[0] || '') + ' on ' + parsed.os;
+    document.getElementById('heroDeviceSub').textContent = `${screen.width}×${screen.height} · DPR ${window.devicePixelRatio}x · ${navigator.hardwareConcurrency || '?'} CPU threads · WebGL ${getGPUInfo().isWebGL2 ? '2' : '1'}`;
+
+    // Update icon
+    const iconSvg = document.getElementById('deviceIconSvg');
+    if (parsed.deviceType === 'Phone') iconSvg.innerHTML = '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>';
+    else if (parsed.deviceType === 'Tablet') iconSvg.innerHTML = '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22h6"/><path d="M12 17h.01"/>';
+    else iconSvg.innerHTML = '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>';
+
+    // Trust ring
+    const pct = Math.min(100, Math.round(totalScore / maxScore * 100));
+    document.getElementById('trustVal').textContent = pct + '%';
+    const circumference = 2 * Math.PI * 29;
+    const offset = circumference - (circumference * pct / 100);
+    document.getElementById('trustRingFill').style.strokeDashoffset = offset;
+  }
+
+  /* Active nav tracking */
+  updateActiveNav();
+}
+
+/* ── Feature view switch ── */
+function switchFeatureView(view, btn) {
+  document.querySelectorAll('.view-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['api','css','media'].forEach(v => {
+    document.getElementById('grid-features-' + v).style.display = v === view ? 'grid' : 'none';
+  });
+}
+
+/* ── Media devices ── */
+async function detectMediaDevices() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+    document.getElementById('grid-media').innerHTML = infoCard('Media Devices', 'API not supported', 'Try in a modern browser');
+    return;
+  }
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const cameras = devices.filter(d => d.kind === 'videoinput');
+    const mics = devices.filter(d => d.kind === 'audioinput');
+    const speakers = devices.filter(d => d.kind === 'audiooutput');
+    document.getElementById('grid-media').innerHTML = [
+      infoCard('Total Devices', String(devices.length)),
+      infoCard('Cameras', String(cameras.length)),
+      infoCard('Microphones', String(mics.length)),
+      infoCard('Speakers', String(speakers.length)),
+      ...cameras.map((cam, i) => infoCard(`Camera ${i+1}`, cam.label || `Camera ${i+1}`, cam.deviceId ? 'ID: ' + cam.deviceId.slice(0,16) + '…' : 'Permission needed for label', 'small')),
+      ...mics.map((mic, i) => infoCard(`Microphone ${i+1}`, mic.label || `Mic ${i+1}`, '', 'small')),
+    ].join('');
+    document.getElementById('sb-media').textContent = cameras.length + ' cam' + (cameras.length !== 1 ? 's' : '');
+    document.getElementById('sb-media').className = 'det-section-badge sbc-ok';
+    document.getElementById('nb-media').textContent = cameras.length + ' cams';
+    document.getElementById('nb-media').className = 'det-nav-badge';
+    showToast(`✓ Found ${devices.length} media devices`);
+  } catch (e) {
+    document.getElementById('grid-media').innerHTML = infoCard('Permission', 'Denied or unavailable', e.message, 'small');
+    document.getElementById('sb-media').textContent = 'Denied';
+    document.getElementById('sb-media').className = 'det-section-badge sbc-na';
+  }
+}
+
+/* ── Geolocation ── */
+function requestGeo() {
+  if (!navigator.geolocation) {
+    document.getElementById('geo-result').innerHTML = infoCard('GPS', 'Not supported', 'Geolocation API unavailable');
+    document.getElementById('sb-geo').textContent = 'N/A';
+    return;
+  }
+  document.getElementById('sb-geo').textContent = 'Requesting…';
+  document.getElementById('sb-geo').className = 'det-section-badge sbc-warn';
+  document.getElementById('geo-result').innerHTML = '<p style="font-size:0.85rem;color:var(--text-3);">⟳ Requesting GPS coordinates…</p>';
+  navigator.geolocation.getCurrentPosition(pos => {
+    const { latitude, longitude, accuracy, altitude, altitudeAccuracy, heading, speed } = pos.coords;
+    document.getElementById('geo-result').innerHTML = [
+      `<div class="info-grid" style="margin-bottom:12px;">`,
+      infoCard('Latitude', latitude.toFixed(6) + '°', '', 'mono'),
+      infoCard('Longitude', longitude.toFixed(6) + '°', '', 'mono'),
+      infoCard('Accuracy', Math.round(accuracy) + ' m', 'Horizontal accuracy'),
+      altitude !== null ? infoCard('Altitude', altitude.toFixed(1) + ' m', altitudeAccuracy ? '±' + altitudeAccuracy.toFixed(1) + ' m' : '') : '',
+      speed !== null ? infoCard('Speed', (speed * 3.6).toFixed(1) + ' km/h', '') : '',
+      heading !== null ? infoCard('Heading', heading.toFixed(1) + '°', 'Direction of travel') : '',
+      `</div>`,
+      `<div class="geo-map-placeholder">
+        <svg class="geo-pin" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg>
+        <div class="geo-coords">
+          ${latitude.toFixed(6)}° N, ${longitude.toFixed(6)}° E<br>
+          <span style="font-size:0.75rem;color:var(--text-3);">±${Math.round(accuracy)}m accuracy · <a href="https://www.google.com/maps?q=${latitude},${longitude}" target="_blank" rel="noopener" style="color:var(--accent-2);">Open in Maps ↗</a></span>
+        </div>
+      </div>`
+    ].join('');
+    document.getElementById('sb-geo').textContent = 'Located';
+    document.getElementById('sb-geo').className = 'det-section-badge sbc-ok';
+    document.getElementById('nb-geo').textContent = 'GPS ✓';
+    document.getElementById('nb-geo').className = 'det-nav-badge';
+    showToast('✓ GPS location detected');
+  }, err => {
+    const msgs = ['Unknown error', 'Permission denied', 'Position unavailable', 'Timeout'];
+    document.getElementById('geo-result').innerHTML = infoCard('GPS Error', msgs[err.code] || 'Error', err.message, 'small');
+    document.getElementById('sb-geo').textContent = 'Denied';
+    document.getElementById('sb-geo').className = 'det-section-badge sbc-na';
+    showToast('⚠️ GPS: ' + (msgs[err.code] || 'Error'));
+  }, { enableHighAccuracy: true, timeout: 10000 });
+}
+
+/* ── Copy full report ── */
+async function copyFullReport() {
+  const gpu = getGPUInfo();
+  const parsed = parseUA(navigator.userAgent);
+  const report = [
+    '═══════════════════════════════════',
+    '   DEVICE REPORT – MobileViewer.pro',
+    '═══════════════════════════════════',
+    `Timestamp   : ${new Date().toISOString()}`,
+    '',
+    '── Browser ──',
+    `Browser     : ${parsed.browser} ${parsed.browserVer}`,
+    `Engine      : ${parsed.engine} ${parsed.engineVer}`,
+    `User Agent  : ${navigator.userAgent}`,
+    '',
+    '── OS ──',
+    `OS          : ${parsed.os} ${parsed.osVer}`,
+    `Platform    : ${navigator.platform}`,
+    `Device Type : ${parsed.deviceType}`,
+    `Language    : ${navigator.language}`,
+    '',
+    '── Screen ──',
+    `Resolution  : ${screen.width} × ${screen.height}`,
+    `Viewport    : ${window.innerWidth} × ${window.innerHeight}`,
+    `DPR         : ${window.devicePixelRatio}`,
+    `Color Depth : ${screen.colorDepth}-bit`,
+    '',
+    '── Hardware ──',
+    `CPU Threads : ${navigator.hardwareConcurrency}`,
+    `Device RAM  : ${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'Unknown'}`,
+    `Touch Points: ${navigator.maxTouchPoints}`,
+    '',
+    '── GPU ──',
+    `Vendor      : ${gpu.vendor}`,
+    `Renderer    : ${gpu.renderer}`,
+    `WebGL       : ${gpu.isWebGL2 ? '2.0' : '1.0'}`,
+    '',
+    '── Network ──',
+    `Online      : ${navigator.onLine}`,
+    `Connection  : ${(navigator.connection||{}).effectiveType || 'Unknown'}`,
+    `Timezone    : ${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
+    '═══════════════════════════════════',
+  ].join('\n');
+
+  await navigator.clipboard.writeText(report).catch(() => {});
+  showToast('✓ Full device report copied to clipboard!');
+}
+
+/* ── Share ── */
+async function shareDevice() {
+  const parsed = parseUA(navigator.userAgent);
+  const text = `My device: ${parsed.browser} on ${parsed.os} | ${screen.width}×${screen.height} | ${window.devicePixelRatio}x DPR | ${navigator.hardwareConcurrency} CPU cores`;
+  if (navigator.share) {
+    try { await navigator.share({ title: 'My Device Info – MobileViewer.pro', text, url: window.location.href }); } catch {}
+  } else {
+    await navigator.clipboard.writeText(text).catch(() => {});
+    showToast('🔗 Device info copied!');
+  }
+}
+
+/* ── Active nav scroll tracking ── */
+function updateActiveNav() {
+  const sections = document.querySelectorAll('.det-section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.det-nav-item').forEach(item => {
+          item.classList.toggle('active', item.dataset.sec === id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+}
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Boot ── */
+window.addEventListener('DOMContentLoaded', () => {
+  detectAll();
+  // Re-detect on orientation change
+  window.addEventListener('orientationchange', () => setTimeout(detectAll, 300));
+  window.addEventListener('online',  () => showToast('🟢 Back online'));
+  window.addEventListener('offline', () => showToast('🔴 Connection lost'));
+});
+</script>
+</body>
+</html>
