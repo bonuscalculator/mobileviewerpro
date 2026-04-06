@@ -27,7 +27,7 @@
               <li><a href="/#viewer">Mobile Viewer</a></li>
               <li><a href="/#features">Features</a></li>
               <li><a href="/#devices">Device Library</a></li>
-              <li><a href="/what-phone-do-i-have">Mobile Device Detector</a></li>
+              <li><a href="/mobile-device-detector">Mobile Device Detector</a></li>
               <li><a href="/image-resizer-compressor">Image Resizer & Compressor</a></li>
               <li><a href="/qr-code-generator">QR Generator</a></li>              
             </ul>
