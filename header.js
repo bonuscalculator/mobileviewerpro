@@ -1,13 +1,6 @@
 /* ===========================
    Header Component – header.js
 =========================== */
-{
-  "file": "header.js",
-  "description": "Header component with integrated navigation, mobile menu, and a new Tools dropdown menu.",
-  "type": "Component/UI"
-}
-
-
 (function () {
   const headerHTML = `
     <header class="site-header" id="siteHeader" role="banner">
@@ -26,13 +19,11 @@
           <a href="/" class="nav-link active" aria-current="page">Home</a>
           
           <div class="nav-dropdown">
-            <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-              Tools
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left:4px; transition: transform 0.2s;">
-                <path d="M6 9l6 6 6-6"/>
-              </svg>
+            <button class="nav-link dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+              Tools 
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left:4px;"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-content">
               <a href="/qr-generator" class="dropdown-item">QR Generator</a>
               <a href="/image-resizer" class="dropdown-item">Image Resizer & Compressor</a>
               <a href="/device-detector" class="dropdown-item">Mobile Device Detector</a>
@@ -64,11 +55,10 @@
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" role="navigation">
       <a href="/" class="nav-link">Home</a>
-      <div style="padding: 10px 20px; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Tools</div>
-      <a href="/qr-generator" class="nav-link" style="padding-left: 32px;">QR Generator</a>
-      <a href="/image-resizer" class="nav-link" style="padding-left: 32px;">Image Resizer & Compressor</a>
-      <a href="/device-detector" class="nav-link" style="padding-left: 32px;">Mobile Device Detector</a>
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 8px 20px;">
+      <div style="padding: 10px 20px; font-weight: 600; color: var(--accent-2); font-size: 0.8rem; text-transform: uppercase;">Tools</div>
+      <a href="/qr-generator" class="nav-link" style="padding-left: 35px;">QR Generator</a>
+      <a href="/image-resizer" class="nav-link" style="padding-left: 35px;">Image Resizer & Compressor</a>
+      <a href="/device-detector" class="nav-link" style="padding-left: 35px;">Mobile Device Detector</a>
       <a href="/#viewer" class="nav-link">Viewer</a>
       <a href="#features" class="nav-link">Features</a>
       <a href="/#devices" class="nav-link">Devices</a>
@@ -87,7 +77,7 @@
   }, { passive: true });
 
   // Active nav link highlight
-  const navLinks = document.querySelectorAll('.header-nav .nav-link:not(.dropdown-toggle)');
+  const navLinks = document.querySelectorAll('.header-nav .nav-link');
   const sections = ['home', 'viewer', 'features', 'devices', 'use-cases', 'faq'];
 
   const observerOpts = { rootMargin: '-20% 0px -70% 0px', threshold: 0 };
@@ -96,9 +86,8 @@
       if (entry.isIntersecting) {
         const id = entry.target.id;
         navLinks.forEach(l => {
-          const href = l.getAttribute('href');
-          l.classList.toggle('active', href === `#${id}` || href === `/#${id}`);
-          l.toggleAttribute('aria-current', href === `#${id}` || href === `/#${id}`);
+          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+          l.toggleAttribute('aria-current', l.getAttribute('href') === `#${id}`);
         });
       }
     });
@@ -110,19 +99,16 @@
   });
 
   // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(link => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href').replace(/^\//, ''); // handle /#id
-      if (href.startsWith('#')) {
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          const top = target.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top, behavior: 'smooth' });
-          // Close mobile menu
-          document.getElementById('mobileMenu').classList.remove('open');
-          document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
-        }
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+        // Close mobile menu
+        document.getElementById('mobileMenu').classList.remove('open');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
       }
     });
   });
@@ -134,13 +120,4 @@
     const isOpen = mobileMenu.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen.toString());
   });
-
-  // Dropdown ARIA handling
-  const dropdownToggle = document.querySelector('.dropdown-toggle');
-  if (dropdownToggle) {
-    dropdownToggle.addEventListener('click', (e) => {
-      const expanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-      dropdownToggle.setAttribute('aria-expanded', !expanded);
-    });
-  }
 })();
