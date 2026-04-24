@@ -3,6 +3,74 @@
 =========================== */
 (function () {
   const headerHTML = `
+    <style>
+      /* Dropdown Styles */
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-trigger {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .dropdown-trigger svg {
+        transition: transform 0.2s ease;
+      }
+
+      .nav-dropdown:hover .dropdown-trigger svg {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--bg-card, #1a1a1a);
+        min-width: 220px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        border: 1px solid var(--border-color, #333);
+        border-radius: 8px;
+        z-index: 1000;
+        padding: 8px 0;
+        margin-top: 10px;
+      }
+
+      .nav-dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-content .nav-link {
+        display: block;
+        padding: 10px 20px;
+        margin: 0 !important;
+        white-space: nowrap;
+      }
+
+      .dropdown-content .nav-link:hover {
+        background-color: var(--accent-1, #333);
+      }
+
+      /* Mobile Adjustment */
+      @media (max-width: 768px) {
+        .dropdown-content {
+          position: static;
+          display: block;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          padding-left: 20px;
+        }
+        .dropdown-trigger svg {
+          display: none;
+        }
+      }
+    </style>
+
     <header class="site-header" id="siteHeader" role="banner">
       <div class="container" style="width:100%;max-width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 32px;">
         <a href="/" class="header-logo" aria-label="Mobile Viewer pro Home">
@@ -19,14 +87,13 @@
           <a href="/" class="nav-link active" aria-current="page">Home</a>
           
           <div class="nav-dropdown">
-            <button class="nav-link dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-              Tools 
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left:4px;"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
+            <a href="#" class="nav-link dropdown-trigger">Tools 
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </a>
             <div class="dropdown-content">
-              <a href="/qr-generator" class="dropdown-item">QR Generator</a>
-              <a href="/image-resizer" class="dropdown-item">Image Resizer & Compressor</a>
-              <a href="/device-detector" class="dropdown-item">Mobile Device Detector</a>
+              <a href="/qr-generator" class="nav-link">1. QR Generator</a>
+              <a href="/image-resizer" class="nav-link">2. Image Resizer & Compressor</a>
+              <a href="/device-detector" class="nav-link">3. Mobile Device Detector</a>
             </div>
           </div>
 
@@ -55,10 +122,9 @@
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" role="navigation">
       <a href="/" class="nav-link">Home</a>
-      <div style="padding: 10px 20px; font-weight: 600; color: var(--accent-2); font-size: 0.8rem; text-transform: uppercase;">Tools</div>
-      <a href="/qr-generator" class="nav-link" style="padding-left: 35px;">QR Generator</a>
-      <a href="/image-resizer" class="nav-link" style="padding-left: 35px;">Image Resizer & Compressor</a>
-      <a href="/device-detector" class="nav-link" style="padding-left: 35px;">Mobile Device Detector</a>
+      <a href="/qr-generator" class="nav-link">QR Generator</a>
+      <a href="/image-resizer" class="nav-link">Image Resizer & Compressor</a>
+      <a href="/device-detector" class="nav-link">Mobile Device Detector</a>
       <a href="/#viewer" class="nav-link">Viewer</a>
       <a href="#features" class="nav-link">Features</a>
       <a href="/#devices" class="nav-link">Devices</a>
