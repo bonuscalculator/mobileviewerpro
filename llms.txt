@@ -1,0 +1,163 @@
+# MobileViewer.pro — Mobile Website Viewer & Responsive Tester
+
+> The most powerful mobile viewer online. Test responsive designs, preview any URL on iPhone, Android, iPad, and 60+ real device profiles — without touching a real phone. 100% browser-based, no setup, no sign-up. View your website instantly on mobile.
+
+## Quick Links
+- [Mobile Viewer Tool](https://www.mobileviewer.pro/): Enter any URL and preview it on mobile, tablet, or desktop instantly.
+- [Device Library](#device-library): 60+ mobile devices — iPhone 15, Google Pixel 8, Samsung Galaxy S24, iPad, and more.
+- [Features](#features): Multi-device preview, tablet support, rotation, custom screen sizes, screenshot capture, zoom & scale.
+- [How It Works](#how-it-works): Enter URL → Choose Device → Preview Instantly — just three steps.
+- [Use Cases](#who-uses-mobileviewerpro): Web developers, UI/UX designers, QA testers, content creators, digital marketers, SEO specialists.
+- [FAQ](#faqs): Common questions about free usage, localhost testing, iframe restrictions, and accuracy.
+
+## Key Features
+
+### Multi-Device Mobile Viewer
+Preview any website on over 60 real mobile device profiles — from iPhone 15 Pro Max to budget Android phones. Each device replicates exact screen dimensions and pixel density for accurate mobile viewing.
+- **iPhone 15, 14, SE series**
+- **Google Pixel 8 & 7**
+- **Samsung Galaxy S24, Z Fold**
+- **OnePlus, Xiaomi** & more
+
+### Tablet & iPad Preview
+Test responsive breakpoints on iPads, Galaxy Tabs, and Kindle Fire. Instantly switch between tablet portrait and landscape orientations.
+
+### Portrait & Landscape Rotation
+Instantly rotate any device between portrait and landscape mode to test your responsive layout at both orientations with a single click.
+
+### Custom Screen Sizes
+Not finding your device? Enter any custom width and height in pixels to create a bespoke mobile viewport for testing any screen dimension.
+
+### Screenshot Capture
+Capture a screenshot of your mobile preview for documentation, client presentations, or sharing with your development team.
+
+### Zoom & Scale Control
+Zoom in or out on your mobile preview to inspect fine details, check icon sizes, or view the full page at a glance — all without leaving the viewer.
+
+### Real Responsive Design Testing
+Go beyond browser DevTools. MobileViewer.pro renders websites at true mobile device dimensions with correct viewport meta behavior, giving you a genuine picture of how users on mobile actually see your site.
+- Accurate viewport simulation
+- CSS media query testing
+- Mobile-first design validation
+- Cross-device breakpoint checking
+
+## How the Mobile Viewer Works
+No setup, no installation, no extensions required. Viewing any website on mobile takes just three steps.
+
+1. **Enter Any URL** — Paste or type the web address of any website you want to view on mobile. Works with any public URL — landing pages, ecommerce stores, web apps, news sites, portfolios, and more.
+2. **Choose Your Device** — Select from 60+ mobile device profiles including the latest iPhones, Android phones, and tablets. Or set a custom width and height to match any specific screen size you need to test.
+3. **Preview Instantly** — See the website rendered live inside an accurate device frame. Rotate, zoom, capture screenshots, and switch between devices — all in real time, all in your browser.
+
+## Device Library — 60+ Mobile Devices Supported
+
+### iPhones
+- iPhone 15 (393 × 852, iOS 17)
+- iPhone 15 Pro Max (430 × 932, iOS 17)
+- iPhone 14 (390 × 844, iOS 16)
+- iPhone 14 Plus (428 × 926, iOS 16)
+- iPhone 13 (390 × 844, iOS 15)
+- iPhone 13 Mini (375 × 812, iOS 15)
+- iPhone SE (3rd) (375 × 667, iOS 16)
+- iPhone 12 (390 × 844, iOS 14)
+- iPhone XR (414 × 896, iOS 12)
+
+### Android Phones
+- Google Pixel 8 (412 × 915, Android 14)
+- Google Pixel 8 Pro (448 × 998, Android 14)
+- Google Pixel 7 (412 × 915, Android 13)
+- Samsung Galaxy S24 (360 × 780, Android 14)
+- Galaxy S24 Ultra (412 × 915, Android 14)
+- Samsung Galaxy S23 (360 × 780, Android 13)
+- Galaxy Z Fold 5 (344 × 882, Android 13)
+- Z Fold 5 (Open) (812 × 882, Android 13)
+- OnePlus 12 (412 × 919, Android 14)
+- Xiaomi 14 (393 × 852, Android 14)
+- Motorola Moto G84 (360 × 800, Android 13)
+
+### Tablets
+- iPad Pro 12.9" (1024 × 1366, iPadOS 17)
+- iPad Mini 6 (744 × 1133, iPadOS 16)
+- iPad Air 5 (820 × 1180, iPadOS 16)
+- iPad (10th Gen) (820 × 1180, iPadOS 16)
+- Samsung Galaxy Tab S9 (800 × 1280, Android 13)
+- Galaxy Tab S9 Ultra (960 × 1600, Android 13)
+- Surface Pro 9 (912 × 1368, Windows 11)
+- Kindle Fire HD 10 (800 × 1280, FireOS 8)
+
+## Who Uses MobileViewer.pro?
+
+### Web Developers
+Test responsive CSS breakpoints, identify mobile rendering bugs, and validate your mobile-first design before deploying. View your localhost or staging URL on any device profile without physical hardware.
+
+### UI/UX Designers
+Preview design implementations on real device dimensions. Check typography legibility, touch target sizes, and visual hierarchy across screen sizes without switching between multiple devices.
+
+### QA Testers
+Systematically check websites across a broad range of mobile devices to catch layout breaks, clickability issues, and mobile-specific bugs before they reach real users.
+
+### Content Creators
+Check how blog posts, landing pages, and content-heavy pages read on mobile screens. Ensure your content is properly formatted and legible before sharing with your audience.
+
+### Digital Marketers
+Preview landing pages, ad destinations, and campaign microsites on mobile before launching paid campaigns. Mobile experience directly impacts conversion rates and quality scores.
+
+### SEO Specialists
+Google uses mobile-first indexing. Validate mobile usability, check font sizes, button tap targets, and viewport configuration to ensure your site passes Core Web Vitals mobile checks.
+
+## Why Mobile Compatibility Matters More Than Ever
+
+Over 60% of global web traffic now comes from mobile devices. Google's mobile-first indexing means the mobile version of your site is what determines your search rankings. A poor mobile website view translates directly into higher bounce rates, lower conversions, and damaged SEO scores.
+
+With MobileViewer.pro, every member of your team — from developers to project managers — can quickly check the mobile experience of any page, at any time, from any device.
+
+### Key Use Cases
+- Mobile website viewer for client presentations
+- Responsive design tester during development
+- Mobile preview tool for content teams
+- View website on mobile before launch
+- Mobile emulator for QA testing
+- Screen size tester for diverse audiences
+- Mobile SEO audit and validation
+
+### Supported Screen Sizes
+- 320px — Small iPhone SE
+- 375px — iPhone standard
+- 390–430px — Large flagship phones
+- 768px — iPad / tablet portrait
+- 1024px — iPad landscape / desktop
+- Custom — Any dimension you need
+
+## Comparison: MobileViewer.pro vs. Browser DevTools
+
+| Capability | MobileViewer.pro | Chrome DevTools |
+|------------|------------------|-----------------|
+| Accessible to non-developers | Yes | No (hidden behind F12) |
+| Realistic device frames | Yes | No |
+| Quick device switching | One click | Buried in menus |
+| Client presentation ready | Yes | No |
+| Screenshot capture | Built-in | Requires extra steps |
+| Custom screen sizes | Yes | Yes |
+| Rotation | One click | Hidden in settings |
+
+## FAQs
+
+### What is a mobile viewer?
+A mobile viewer is an online tool that loads a website inside a simulated mobile device frame at exact mobile screen dimensions. MobileViewer.pro renders your target URL inside an iframe sized to the chosen device's viewport, giving you an accurate preview of how that website appears and behaves on mobile screens — all within your desktop browser.
+
+### Is it really free?
+Yes. MobileViewer.pro is completely free to use with no account required. Simply visit the site, enter a URL, select a device, and start previewing. No credit card, no sign-up, no download needed.
+
+### Can I test localhost or staging sites?
+For publicly accessible staging URLs (e.g., on a subdomain or behind a URL), yes. For true localhost development servers (localhost:3000, etc.), the preview may be limited by browser cross-origin restrictions. We recommend using tools like ngrok to tunnel your local server to a public URL for full mobile preview testing.
+
+### How is this different from Chrome DevTools?
+Chrome DevTools device emulation is a developer-only tool buried behind F12. MobileViewer.pro is accessible to everyone — designers, marketers, and clients — with no technical knowledge required. Our tool also provides realistic device frames for more convincing client presentations, and supports quick device switching without navigating DevTools menus.
+
+### What devices are supported?
+MobileViewer.pro supports 60+ device profiles including all major iPhone models (iPhone SE through iPhone 15 Pro Max), Google Pixel series, Samsung Galaxy S and Z series, OnePlus, and a range of tablets including iPad Pro, iPad Mini, Samsung Galaxy Tab, and Microsoft Surface. You can also enter any custom screen size.
+
+### Why can't I preview some websites?
+Most public websites load correctly. Some websites block iframe embedding via X-Frame-Options or Content-Security-Policy headers, which may prevent preview. In those cases, you'll see a message indicating the site cannot be embedded. This is a security restriction set by the website itself, not a limitation of our tool.
+
+### Can I capture screenshots?
+Yes! Click the Screenshot button in the viewer toolbar to capture the current mobile preview. The image will be downloaded automatically. This is useful for documentation, design reviews, bug reports, and client presentations.
