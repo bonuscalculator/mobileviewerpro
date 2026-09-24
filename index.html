@@ -157,7 +157,9 @@
             <div class="stat"><strong>0ms</strong><span>Setup time</span></div>
           </div>
         </div>
-        <div class="hero-visual">
+
+        <!-- Hidden legacy markup (kept for script compatibility, not rendered) -->
+        <div class="hero-visual" hidden aria-hidden="true">
           <div class="device-showcase">
             <div class="device phone" id="heroPhone">
               <div class="device-frame">
@@ -717,5 +719,39 @@
   <script src="/header.js"></script>
   <script src="/footer.js"></script>
   <script src="/app.js"></script>
+
+  <!-- Scroll reveal animations -->
+  <script>
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var selector = [
+      '.viewer-header', '.url-bar-wrap', '.device-picker', '.viewer-tools',
+      '.stage-info', '.viewer-sidebar > *',
+      '.section-label', '.section-title', '.section-sub',
+      '.feature-card', '.step', '.usecase-card',
+      '.content-main > *', '.content-box', '.faq-item',
+      '.cta-inner', '.device-category-tabs'
+    ].join(',');
+
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
+    if (!nodes.length) return;
+
+    nodes.forEach(function (el, i) {
+      el.classList.add('reveal');
+      el.style.transitionDelay = ((i % 4) * 70) + 'ms';
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    nodes.forEach(function (el) { io.observe(el); });
+  })();
+  </script>
 </body>
 </html>
